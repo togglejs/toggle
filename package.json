@@ -11,5 +11,8 @@
     "static"
   ],
   "author": "Jason Jarrett",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "~3.6.1"
+  }
 }
