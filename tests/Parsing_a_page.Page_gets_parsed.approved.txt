@@ -1,0 +1,11 @@
+{
+  "options": {
+    "type": "post",
+    "test": [
+      "a",
+      "b"
+    ]
+  },
+  "content": "hello [link](http://google.com)\n<div> html </div>",
+  "raw": "---\r\ntype: post\r\ntest: \r\n - a\r\n - b\r\n---\r\n\r\nhello [link](http://google.com)\r\n\r\n<div>\r\n  html\r\n</div>\r\n"
+}
