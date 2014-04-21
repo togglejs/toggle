@@ -3,12 +3,15 @@ require('approvals').configure({
 }).mocha(__dirname);
 
 var bulp = require("../lib/bulp.js");
+var fs = require('fs');
 
 describe('Parsing a page', function () {
     it('Page gets parsed', function () {
         var filePath = 'tests/samplePosts/2014-20-01.md';
 
-        var metadata = bulp.getPage(filePath);
+        var contents = fs.readFileSync(filePath, 'utf-8');
+
+        var metadata = bulp.getPage(contents);
 
         this.verifyAsJSON(metadata);
     });

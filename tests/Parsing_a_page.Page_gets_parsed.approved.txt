@@ -7,6 +7,6 @@
       "b"
     ]
   },
-  "content": "Name: {{name}}\r\n\r\nhello [link](http://google.com)\r\n\r\n<div>\r\n  html\r\n</div>\r\n",
+  "contents": "Name: {{name}}\r\n\r\nhello [link](http://google.com)\r\n\r\n<div>\r\n  html\r\n</div>\r\n",
   "raw": "---\r\ntype: post\r\nname: \"Sample Post\"\r\ntest: \r\n - a\r\n - b\r\n---\r\n\r\nName: {{name}}\r\n\r\nhello [link](http://google.com)\r\n\r\n<div>\r\n  html\r\n</div>\r\n"
 }
