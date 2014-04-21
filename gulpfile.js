@@ -61,6 +61,7 @@ gulp.task('default', function () {
 
     var liquid = require("gulp-liquid");
     var debug = require('gulp-debug');
+    var markdown = require('gulp-markdown');
 
     return gulp.src("./tests/**/*.md")
         .pipe(bulpPlugin())
@@ -70,5 +71,6 @@ gulp.task('default', function () {
                 name: "Jason"
             }
         }))
+        .pipe(markdown())
         .pipe(gulp.dest("./dist"));
 });
