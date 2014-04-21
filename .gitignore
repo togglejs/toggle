@@ -1,5 +1,5 @@
 node_modules/
 *.received.txt
-.suo
+*.suo
 
 dist/
