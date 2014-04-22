@@ -1,8 +1,8 @@
 {
-  "name": "bulpjs",
+  "name": "bulp",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/bulp.js",
   "scripts": {
     "test": "mocha tests/*.js"
   },

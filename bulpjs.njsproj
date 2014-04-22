@@ -30,6 +30,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="gulpfile.js" />
+    <Compile Include="lib\bulp-liquid.js" />
     <Compile Include="lib\bulp.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
