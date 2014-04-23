@@ -18,6 +18,8 @@
     "js-yaml": "~3.0.2",
     "gulp-markdown": "^0.1.2",
     "liquid-node": "^0.2.0",
-    "lodash": "^2.4.1"
+    "lodash": "^2.4.1",
+    "through2": "^0.4.1",
+    "gulp-util": "^2.2.14"
   }
 }
