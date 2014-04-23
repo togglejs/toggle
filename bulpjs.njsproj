@@ -32,6 +32,7 @@
     <Compile Include="gulpfile.js" />
     <Compile Include="lib\bulp-liquid.js" />
     <Compile Include="lib\bulp.js" />
+    <Compile Include="lib\handlebarRender.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
   </ItemGroup>
