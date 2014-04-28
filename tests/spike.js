@@ -11,7 +11,7 @@ describe('Parsing a page', function () {
 
         var contents = fs.readFileSync(filePath, 'utf-8');
 
-        var metadata = bulp.getPage(contents);
+        var metadata = bulp.splitYamlFromContent(contents);
 
         this.verifyAsJSON(metadata);
     });
