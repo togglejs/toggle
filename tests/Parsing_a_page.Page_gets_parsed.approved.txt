@@ -1,13 +1,11 @@
 {
-  "options": {
-    "layout": "post",
-    "name": "Sample Post",
-    "date": "2010-02-11T11:02:57.000Z",
-    "test": [
-      "a",
-      "b"
-    ]
-  },
-  "contents": "Name: {{name}}\r\n\r\nhello [link](http://google.com)\r\n\r\n<div>\r\n  html\r\n</div>\r\n",
-  "raw": "---\r\nlayout: post\r\nname: \"Sample Post\"\r\ndate: 2010-02-11 11:02:57\r\ntest: \r\n - a\r\n - b\r\n---\r\n\r\nName: {{name}}\r\n\r\nhello [link](http://google.com)\r\n\r\n<div>\r\n  html\r\n</div>\r\n"
+  "layout": "post",
+  "name": "Sample Post",
+  "date": "2010-02-11T11:02:57.000Z",
+  "test": [
+    "a",
+    "b"
+  ],
+  "rawContents": "---\r\nlayout: post\r\nname: \"Sample Post\"\r\ndate: 2010-02-11 11:02:57\r\ntest: \r\n - a\r\n - b\r\n---\r\n\r\nName: {{name}}\r\n\r\nhello [link](http://google.com)\r\n\r\n<div>\r\n  html\r\n</div>\r\n",
+  "contents": "Name: {{name}}\r\n\r\nhello [link](http://google.com)\r\n\r\n<div>\r\n  html\r\n</div>\r\n"
 }
