@@ -21,11 +21,15 @@
     "lodash": "^2.4.1",
     "through2": "^0.4.1",
     "gulp-util": "^2.2.14",
-    "moment": "^2.6.0"
+    "moment": "^2.6.0",
+    "gulp-mocha": "^0.4.1",
+    "chai": "^1.9.1"
   },
   "dependencies": {
     "glob": "^3.2.9",
     "diy-handlebars-helpers": "^1.0.10",
-    "js-striphtml": "^1.1.0"
+    "js-striphtml": "^1.1.0",
+    "gulp-debug": "^0.3.0",
+    "node-uuid": "^1.4.1"
   }
 }
