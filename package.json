@@ -30,6 +30,7 @@
     "diy-handlebars-helpers": "^1.0.10",
     "js-striphtml": "^1.1.0",
     "gulp-debug": "^0.3.0",
-    "node-uuid": "^1.4.1"
+    "node-uuid": "^1.4.1",
+    "xml": "0.0.12"
   }
 }
