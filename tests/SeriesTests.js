@@ -20,7 +20,7 @@ describe("when using an app", function () {
         site.showUnPublished = true;
         var Post = site.Post;
 
-        seriesPost1 = new Post();
+        seriesPost1 = {};
         seriesPost1.date = new Date(2011, 1, 1);
 
         seriesPost1.seriesTitle = "Introduction"
@@ -30,7 +30,7 @@ describe("when using an app", function () {
         seriesPost1.contents = sampleContents;
         seriesPost1.url = "/seriesPost1_url";
 
-        seriesPost2 = new Post();
+        seriesPost2 = {};
         seriesPost2.date = new Date(2011, 1, 1);
         seriesPost2.categories = ["series", "post"];
         seriesPost2.contents = sampleContents;

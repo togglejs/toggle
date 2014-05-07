@@ -89,5 +89,21 @@ describe("when using a site", function () {
             expect(post[0].title).to.equal(expectedPost.title);
         });
 
+        it("A post should pull categoriesSlugFormat from the site's prototype.", function () {
+            expect(site.posts[0].categoriesSlugFormat).to.equal("/blog/categories/{category}/");
+        });
+
+        it("A post should have categories.", function () {
+            expect(site.posts[0].categories).to.eql([
+                {
+                    name: "a",
+                    url: "/blog/categories/a/"
+                },
+                {
+                    name: "post",
+                    url: "/blog/categories/post/"
+                },
+            ]);
+        });
     });
 });
