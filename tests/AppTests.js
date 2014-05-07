@@ -12,7 +12,7 @@ var Post = site.Post;
 
 var sampleContents = "<div>Hello World!</div>";
 
-var postA = new Post();
+var postA = {};
 postA.date = new Date(2011, 1, 1);
 postA.title = "Post A";
 postA.published = true;
@@ -21,7 +21,7 @@ postA.contents = sampleContents;
 postA.url = "/posta_url";
 site.addFile(postA);
 
-var postB = new Post();
+var postB = {};
 postB.title = "Post B";
 postB.published = false;
 postB.date = new Date(2011, 1, 1);
@@ -30,7 +30,7 @@ postB.contents = sampleContents;
 postB.url = "/postb_url";
 site.addFile(postB);
 
-var seriesPost1 = new Post();
+var seriesPost1 = {};
 seriesPost1.seriesTitle = "Introduction"
 seriesPost1.published = true;
 seriesPost1.date = new Date(2011, 1, 1);
@@ -41,7 +41,7 @@ seriesPost1.contents = sampleContents;
 seriesPost1.url = "/seriesPost1_url";
 site.addFile(seriesPost1);
 
-var seriesPost2 = new Post();
+var seriesPost2 = {};
 seriesPost2.seriesTitle = "series post 2";
 seriesPost2.published = false;
 seriesPost2.date = new Date(2011, 1, 1);
@@ -75,7 +75,19 @@ describe("when using a site", function () {
 
         it("should override defaults", function () {
             expect(site.posts[0].twitter.tweetButton).to.equal(true);
-        })
+        });
+
+        it("should generate category objects", function () {
+            expect(site.getCategories()).to.eql(['a', 'post', 'series']);
+        });
+
+        it("should get posts for a category", function () {
+            var post = site.getPostsByCategory('a');
+            var expectedPost = site.posts[0];
+
+            expect(post.length).to.equal(1);
+            expect(post[0].title).to.equal(expectedPost.title);
+        });
 
     });
 });
