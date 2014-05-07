@@ -1,6 +1,6 @@
 ﻿var expect = require('chai').expect;
 
-var app = require('../lib/App.js')({
+var site = require('../lib/Site.js')({
 
     twitter: {
         tweetButton: true,
@@ -8,8 +8,7 @@ var app = require('../lib/App.js')({
 });
 
 
-var site = app.site;
-var Post = app.Post;
+var Post = site.Post;
 
 var sampleContents = "<div>Hello World!</div>";
 
@@ -54,7 +53,7 @@ site.addFile(seriesPost2);
 
 
 
-describe("when using an app", function () {
+describe("when using a site", function () {
 
     describe("with a site", function () {
 

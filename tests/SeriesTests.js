@@ -2,14 +2,13 @@
 
 
 describe("when using an app", function () {
-    var app;
     var seriesPost1;
     var seriesPost2;
     var site
 
     beforeEach(function () {
 
-        app = require('../lib/App.js')({
+        site = require('../lib/Site')({
 
             twitter: {
                 tweetButton: true,
@@ -17,9 +16,9 @@ describe("when using an app", function () {
         });
 
         var sampleContents = "<div>Hello World!</div>";
-        site = app.site;
+
         site.showUnPublished = true;
-        var Post = app.Post;
+        var Post = site.Post;
 
         seriesPost1 = new Post();
         seriesPost1.date = new Date(2011, 1, 1);
