@@ -61,11 +61,11 @@ describe("when using an app", function () {
                 expect(series).to.be.ok;
             });
 
-            it("Should have a series object", function () {
+            it("Should have a series totalCount", function () {
                 expect(series.totalCount).to.equal(1);
             });
 
-            it("Should have a series object", function () {
+            it("Should have a series publishedCount", function () {
                 expect(series.publishedCount).to.equal(0);
             });
 
@@ -99,11 +99,11 @@ describe("when using an app", function () {
                 expect(series).to.be.ok;
             });
 
-            it("Should have a series object", function () {
+            it("Should have a series totalCount", function () {
                 expect(series.totalCount).to.equal(2);
             });
 
-            it("Should have a series object", function () {
+            it("Should have a series publishedCount", function () {
                 expect(series.publishedCount).to.equal(1);
             });
 
