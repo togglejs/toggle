@@ -112,6 +112,9 @@ describe("when using a site", function () {
         it("A page can access the homePaginator.", function () {
             expect(site.pages[0].homePaginator).to.be.ok;
         });
+        it("A page can access the homePaginator.posts.length", function () {
+            expect(site.homePaginator.posts.length).to.equal(2);
+        });
 
         //it("A post should have categories.", function () {
         //    expect(site.posts[0].categories).to.eql([
