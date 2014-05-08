@@ -128,12 +128,19 @@ describe("when using a site", function () {
             });
 
             it("has an object for 2010", function () {
-                expect(site.postsGroupedByYear[2010]).to.be.ok;
+                expect(site.postsGroupedByYear[0]).to.be.ok;
+            });
+
+            it("has two posts in 2010", function () {
+                expect(site.postsGroupedByYear[0].posts.length).to.equal(2);
+            });
+
+            it("has two posts in 2010", function () {
+                expect(site.postsGroupedByYear[0].year).to.equal("2010");
             });
 
             it("has only posts from 2010", function () {
-                var keys = Object.keys(site.postsGroupedByYear);
-                expect(keys).to.be.eql(["2010"]);
+                expect(site.postsGroupedByYear[0].year).to.be.eql("2010");
             });
 
         })
