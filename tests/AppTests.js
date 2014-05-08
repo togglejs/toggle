@@ -13,6 +13,16 @@ var Post = site.Post;
 
 var sampleContents = "<div>Hello World!</div>";
 
+var pageA = {};
+pageA.layout = 'page';
+pageA.date = new Date(2011, 1, 1);
+pageA.title = "Post A";
+pageA.published = true;
+pageA.categories = ["a", "post"];
+pageA.contents = sampleContents;
+pageA.url = "/posta_url";
+site.addFile(pageA);
+
 var postA = {};
 postA.date = new Date(2011, 1, 1);
 postA.title = "Post A";
@@ -96,6 +106,11 @@ describe("when using a site", function () {
 
         it("A post should pull categoriesSlugFormat from the site's prototype.", function () {
             expect(site.posts[0].categoriesSlugFormat).to.equal("/blog/categories/{category}/");
+        });
+
+
+        it("A page can access the homePaginator.", function () {
+            expect(site.pages[0].homePaginator).to.be.ok;
         });
 
         //it("A post should have categories.", function () {
