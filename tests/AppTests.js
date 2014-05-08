@@ -15,7 +15,7 @@ var sampleContents = "<div>Hello World!</div>";
 
 var pageA = {};
 pageA.layout = 'page';
-pageA.date = new Date(2011, 1, 1);
+pageA._date = new Date(2011, 1, 1);
 pageA.title = "Post A";
 pageA.published = true;
 pageA.categories = ["a", "post"];
@@ -24,7 +24,7 @@ pageA.url = "/posta_url";
 site.addFile(pageA);
 
 var postA = {};
-postA.date = new Date(2011, 1, 1);
+postA._date = new Date(2010, 1, 1);
 postA.title = "Post A";
 postA.published = true;
 postA.categories = ["a", "post"];
@@ -35,7 +35,7 @@ site.addFile(postA);
 var postB = {};
 postB.title = "Post B";
 postB.published = false;
-postB.date = new Date(2011, 1, 1);
+postB._date = new Date(2011, 1, 1);
 postB.categories = ["b", "post"];
 postB.contents = sampleContents;
 postB.url = "/postb_url";
@@ -44,7 +44,7 @@ site.addFile(postB);
 var seriesPost1 = {};
 seriesPost1.seriesTitle = "Introduction"
 seriesPost1.published = true;
-seriesPost1.date = new Date(2011, 1, 1);
+seriesPost1._date = new Date(2010, 2, 1);
 seriesPost1.seriesId = 'sample-series';
 seriesPost1.seriesAbout = "some series about foo";
 seriesPost1.categories = ["series", "post"];
@@ -55,7 +55,7 @@ site.addFile(seriesPost1);
 var seriesPost2 = {};
 seriesPost2.seriesTitle = "series post 2";
 seriesPost2.published = false;
-seriesPost2.date = new Date(2011, 1, 1);
+seriesPost2._date = new Date(2011, 1, 1);
 seriesPost2.seriesId = 'sample-series';
 seriesPost2.categories = ["series", "post"];
 seriesPost2.contents = sampleContents;
@@ -77,11 +77,16 @@ describe("when using a site", function () {
         });
 
         it("first post is valid", function () {
-            expect(site.posts[0].title).to.equal("Post A");
+            expect(site.posts[0].title).to.equal("some series about foo - Part 1 - Introduction");
         });
 
         it("post url", function () {
-            expect(site.posts[0].url).to.equal("/posta_url");
+            expect(site.posts[0].url).to.equal("/seriesPost1_url");
+        });
+
+
+        it("post date", function () {
+            expect(site.posts[0].date).to.be.ok;
         });
 
         it("should override defaults", function () {
@@ -116,17 +121,22 @@ describe("when using a site", function () {
             expect(site.homePaginator.posts.length).to.equal(2);
         });
 
-        //it("A post should have categories.", function () {
-        //    expect(site.posts[0].categories).to.eql([
-        //        {
-        //            name: "a",
-        //            url: "/blog/categories/a/"
-        //        },
-        //        {
-        //            name: "post",
-        //            url: "/blog/categories/post/"
-        //        },
-        //    ]);
-        //});
+        describe('when lookign at the postsGroupedByYear', function () {
+
+            it("A page can access the property has something", function () {
+                expect(site.postsGroupedByYear).to.be.ok;
+            });
+
+            it("has an object for 2010", function () {
+                expect(site.postsGroupedByYear[2010]).to.be.ok;
+            });
+
+            it("has only posts from 2010", function () {
+                var keys = Object.keys(site.postsGroupedByYear);
+                expect(keys).to.be.eql(["2010"]);
+            });
+
+        })
+
     });
 });
