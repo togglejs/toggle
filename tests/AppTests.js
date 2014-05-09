@@ -101,6 +101,67 @@ describe("when using a site", function () {
             expect(result).to.eql(['a', 'post', 'series']);
         });
 
+        describe("When looking for a specific category", function () {
+            var aCategory;
+            before(function () {
+                site.getCategories().forEach(function (category) {
+                    if (category.name === "a") {
+                        aCategory = category;
+                    }
+                })
+            });
+
+            it("should have found the category", function () {
+                expect(aCategory).to.be.ok;
+            });
+
+            it("should have a category property", function () {
+                expect(aCategory).to.be.ok;
+            });
+
+            it("The category should have posts", function () {
+                expect(aCategory.categoryPosts).to.be.ok;
+            });
+
+            it("The category should have correct post count", function () {
+                expect(aCategory.categoryPosts.length).to.equal(1);
+            });
+
+        });
+
+
+        describe("When looking for a specific category with more than one post", function () {
+            var aCategory;
+            before(function () {
+                site.getCategories().forEach(function (category) {
+                    if (category.name === "post") {
+                        aCategory = category;
+                    }
+                })
+            });
+
+            it("should have found the category", function () {
+                expect(aCategory).to.be.ok;
+            });
+
+            it("should have a category property", function () {
+                expect(aCategory).to.be.ok;
+            });
+
+            it("The category should have posts", function () {
+                expect(aCategory.categoryPosts).to.be.ok;
+            });
+
+            it("The category should have a file property", function () {
+                expect(aCategory.file).to.be.ok;
+            });
+
+            it("The category should have correct post count", function () {
+                expect(aCategory.categoryPosts.length).to.equal(2);
+            });
+
+        });
+
         //it("should get posts for a category", function () {
         //    var post = site.getPostsByCategory('a');
         //    var expectedPost = site.posts[0];
