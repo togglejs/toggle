@@ -1,8 +1,7 @@
 # TODO
 
-- [ ] rss feed
-- [ ] Categories pages/feeds
-
+- [ ] Pagination
+- [ ] url's need to end with a "/" to avoid a redirect on the server
 - [ ] Add `gulpplugin` as a keyword in `package.json` (if this turns into a plugin)
 - [ ] how to handle 'un-published posts'?
 - [ ] include template helper? (could I replace that with {{> templateName }}???)
