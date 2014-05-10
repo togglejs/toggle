@@ -18,5 +18,10 @@
     "expected": "plus",
     "actual": "plus",
     "args": "+"
+  },
+  {
+    "expected": "_",
+    "actual": "_",
+    "args": "/"
   }
 ]

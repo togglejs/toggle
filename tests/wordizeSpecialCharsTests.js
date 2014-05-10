@@ -2,9 +2,11 @@ require('approvals').configure({
     reporters: ["visualstudio", "opendiff"]
 }).mocha(__dirname);
 
+var expect = require('chai').expect;
+
 var wordizeSpecialChars = require("../lib/wordizeSpecialChars");
 
-it('replaces special charasters ', function () {
+describe('replaces special charasters ', function () {
 
     var strs = [
         {
@@ -27,18 +29,23 @@ it('replaces special charasters ', function () {
             actual: null,
             args: "+",
         },
+        {
+            expected: "_",
+            actual: null,
+            args: "/",
+        },
 
     ]
 
-    var result = strs.map(function (item) {
-        item.actual = wordizeSpecialChars(item.args);
+    strs.forEach(function (item) {
 
-        if (item.expected !== item.actual) {
-            item.ERROR = "!!!!!!!!!!!!!! NOPE !!!!!!!!!!!!!!!!!!!";
-        }
+        it("Should replace " + item.args + " with " + item.expected, function () {
 
-        return item;
+            item.actual = wordizeSpecialChars(item.args);
+
+            expect(item.actual).to.equal(item.expected);
+        });
+
     });
-        
-    this.verifyAsJSON(result);
+
 });
