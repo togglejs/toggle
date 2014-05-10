@@ -1,7 +1,7 @@
 ﻿var expect = require('chai').expect;
 var _ = require('lodash');
 
-var site = require('../lib/Site.js')({
+var site = require('../lib/App/Site')({
 
     twitter: {
         tweetButton: true,

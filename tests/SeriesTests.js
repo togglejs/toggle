@@ -8,7 +8,7 @@ describe("when using an app", function () {
 
     beforeEach(function () {
 
-        site = require('../lib/Site')({
+        site = require('../lib/App/Site')({
 
             twitter: {
                 tweetButton: true,
