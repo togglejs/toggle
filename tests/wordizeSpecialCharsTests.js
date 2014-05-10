@@ -26,13 +26,10 @@ describe('replaces special charasters ', function () {
         },
         {
             expected: "plus",
-            actual: null,
             args: "+",
         },
         {
-            expected: "_",
-            actual: null,
-            args: "/",
+            expected: "_", args: "/",
         },
 
     ]
