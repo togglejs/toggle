@@ -108,7 +108,7 @@ describe("Paginator", function () {
         });
 
         it("should not have a nextPageLink", function () {
-            expect(paginator.nextPageLink).to.equal("/blog/page/2");
+            expect(paginator.nextPageLink).to.equal("/blog/page/2/");
         });
 
         it("should not have a previousPageLink", function () {
@@ -145,7 +145,7 @@ describe("Paginator", function () {
             });
 
             it("should have a previousPageLink", function () {
-                expect(paginator.previousPageLink).to.equal("/blog/page/1");
+                expect(paginator.previousPageLink).to.equal("/blog/page/1/");
             });
 
         });
@@ -176,11 +176,11 @@ describe("Paginator", function () {
             });
 
             it("should not have a nextPageLink", function () {
-                expect(paginator.nextPageLink).to.equal("/blog/page/4");
+                expect(paginator.nextPageLink).to.equal("/blog/page/4/");
             });
 
             it("should have a previousPageLink", function () {
-                expect(paginator.previousPageLink).to.equal("/blog/page/2");
+                expect(paginator.previousPageLink).to.equal("/blog/page/2/");
             });
 
             describe("and we've changed the link prefix", function () {
@@ -190,7 +190,7 @@ describe("Paginator", function () {
                 })
                 
                 it("should have a previousPageLink", function () {
-                    expect(paginator.previousPageLink).to.equal("test/something/2");
+                    expect(paginator.previousPageLink).to.equal("test/something/2/");
                 });
 
             });
