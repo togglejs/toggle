@@ -1,0 +1,19 @@
+{{#if page_header }}
+  <header>
+    {{#if index }}
+      <h1 class="entry-title"><a href="{{fullUrl this }}">{{#if titlecase }}{{titlecase title }}{{else}}{{ title }}{{/if}}</a></h1>
+    {{else}}
+      <h1 class="entry-title">{{#if titlecase }}{{titlecase title }}{{else}}{{ title }}{{/if}}</h1>
+    {{/if}}
+    {{#if page_meta }}
+      <p class="meta">
+        {{#if date }}{{{include "post/date" }}}{{ time }}{{/if}}
+        {{#comment}}
+        {{#if disqus.short_name}}| <a href="{{#if index }}{{ root_url }}{{ post.url }}{{/if}}#disqus_thread"
+             data-disqus-identifier="{{#if disqus_id }}{{ meta.disqus_id }}{{else}}{{ url }}{{ post.url }}{{/if}}">Comments</a>{{/if}}
+        {{/comment}}
+      </p>
+    {{/if}}
+  </header>
+{{/if}}
+<div class="entry-content">{{{ contents }}}</div>

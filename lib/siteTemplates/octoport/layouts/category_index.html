@@ -1,0 +1,34 @@
+{{{include "head" }}}
+<body {{#if body_id }} id="{{ body_id }}" {{/if}} {{#unless sidebar}} class="no-sidebar" {{/unless}} {{#if sidebar_collapse}} class="collapse-sidebar sidebar-footer" {{/if}}>
+<header role="banner">{{{include "header" }}}</header>
+<nav role="navigation">{{{include "navigation" }}}</nav>
+<div id="main">
+    <div id="content">
+
+        <div class="blog-index">
+            {{#each categoryPosts }}
+            <article>
+                {{{include "article" }}}
+            </article>
+            {{/each}}
+            <div class="pagination">
+                {{#if categoryPosts.paginator.next_page }}
+                <a class="prev" href="{{categoryPosts.paginator.nextPageLink}}">&larr; Older</a>
+                {{/if }}
+                <a href="/blog/archives">Blog Archives</a>
+                {{#if categoryPosts.paginator.previous_page }}
+                <a class="next" href="{{categoryPosts.paginator.previousPageLink}}">Newer &rarr;</a>
+                {{/if }}
+            </div>
+        </div>
+        <aside class="sidebar">
+            {{{include "sidebar"}}}
+        </aside>
+ 
+
+    </div>
+</div>
+<footer role="contentinfo">{{{include "footer" }}}</footer>
+  {{{include "after_footer" }}}
+</body>
+</html>

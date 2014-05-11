@@ -1,0 +1,7 @@
+{{#if date}}
+  <time datetime="{{date_to_xmlschema date}}" pubdate{{#if updated }} data-updated="true" {{/if}}>{{formatDate date }}</time>
+{{/if}}
+
+{{#if was_updated }}
+  <time datetime="{{date_to_xmlschema updated }}" class="updated">Updated {{ updated_formatted }}</time>
+{{else}}{{/if}}

@@ -14,6 +14,7 @@ describe("tog", function () {
         'alias',
         'filterext',
         'wordizeSpecialChars',
+        'loadHandlebarTheme',
     ].forEach(function (item) {
         it("should export " + item, function() {
             expect(tog[item]).to.be.ok;

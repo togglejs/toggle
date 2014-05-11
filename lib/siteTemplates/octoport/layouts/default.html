@@ -1,0 +1,13 @@
+{{{include "head" }}}
+<body {{#if body_id }} id="{{ body_id }}" {{/if}} {{#unless sidebar}} class="no-sidebar" {{/unless}} {{#if sidebar_collapse}} class="collapse-sidebar sidebar-footer" {{/if}}>
+<header role="banner">{{{include "header" }}}</header>
+<nav role="navigation">{{{include "navigation" }}}</nav>
+<div id="main">
+    <div id="content">
+        {{{ contents }}}
+    </div>
+</div>
+<footer role="contentinfo">{{{include "footer" }}}</footer>
+  {{{include "after_footer" }}}
+</body>
+</html>

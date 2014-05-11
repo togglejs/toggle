@@ -1,0 +1,47 @@
+{{{include "head" }}}
+<body {{#if body_id }} id="{{ body_id }}" {{/if}} class="{{#unless sidebar}}no-sidebar{{/unless}} {{#if sidebar_collapse}}collapse-sidebar sidebar-footer{{/if}}">
+<header role="banner">{{{include "header" }}}</header>
+<nav role="navigation">{{{include "navigation" }}}</nav>
+<div id="main">
+    <div id="content">
+
+        <div>
+            <article role="article">
+                {{#if title }}
+                <header>
+                    <h1 class="entry-title">{{#if titlecase }}{{titlecase title }}{{else}}{{ title }}{{/if}}</h1>
+                    {{#if date }}<p class="meta">{{{include "post/date" }}}{{ time }}</p>{{/if}}
+                </header>
+                {{/if}}
+
+                {{{contents}}}
+
+                {{#if footer}}
+                <footer>
+                    {{#if date}}<p class="meta">
+                        {{{include "post/date" }}}{{ time }}{{#if updated }}{{ updated }}{{else}}{{ time }}{{/if}}
+                        {{#if categories }}{{{include "post/categories" }}}{{/if}}
+                    </p>{{/if}}
+                    {{#if sharing }}
+                    {{{include "post/sharing" }}}
+                    {{/if}}
+                </footer>
+                {{/if}}
+            </article>
+            {{#if disqus.short_name}}
+            <section>
+                <h1>Comments</h1>
+                <div id="disqus_thread" aria-live="polite">{{{include "disqus_thread" }}}</div>
+            </section>
+            {{/if}}
+        </div>
+
+        <aside class="sidebar">
+            {{{include "sidebar"}}}
+        </aside>
+    </div>
+</div>
+<footer role="contentinfo">{{{include "footer" }}}</footer>
+  {{{include "after_footer" }}}
+</body>
+</html>

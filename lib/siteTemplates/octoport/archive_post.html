@@ -1,0 +1,7 @@
+<h1><a href="{{fullUrl url}}">{{ title }}</a></h1>
+<time datetime="{{date_to_xmlschema date }}" pubdate>{{formatDate date format="MMM Do"}}</time>
+{{#if hasCategories}}
+<footer>
+  <span class="categories">posted in {{{include "category_links"}}}</span>
+</footer>
+{{/if}}

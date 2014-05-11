@@ -1,0 +1,12 @@
+{{#if recentPostsConfig.show }}
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    {{#each recentPosts}}
+      <li class="post">
+        <a href="{{url}}">{{#if titlecase }}{{title-case title }}{{else}}{{ title }}{{/if}}</a>
+      </li>
+    {{/each}}
+  </ul>
+</section>
+{{/if}}

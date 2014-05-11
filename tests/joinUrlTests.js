@@ -61,7 +61,6 @@ it('can join url\'s ', function () {
             actual: null,
             args: ["/", "join"],
         },
-        
     ]
 
     var result = urls.map(function (item) {

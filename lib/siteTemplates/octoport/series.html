@@ -1,0 +1,11 @@
+﻿
+<div class="seriesNote">
+    <p>This article is <strong>Part {{seriesIndex}}</strong> of <strong>{{series.totalCount}}</strong> in a series about <strong>{{series.about}}</strong>.</p>
+    <ul>
+        {{#each series.posts}}
+        <li>
+            Part {{seriesIndex}} - {{#postCompare ../this }}{{/postCompare}}
+        </li>
+        {{/each}}
+    </ul>
+</div>

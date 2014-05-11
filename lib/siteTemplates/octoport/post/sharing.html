@@ -1,0 +1,11 @@
+<div class="sharing">
+  {{#if twitter.tweetButton }}
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="{{fullUrl this }}" data-via="{{ twitter.username }}" data-counturl="{{fullUrl this }}">Tweet</a>
+  {{/if}}
+  {{#if google.plusOneButton }}
+  <div class="g-plusone" data-size="{{ google.plusOneSize }}"></div>
+  {{/if}}
+  {{#if facebook.likeButton }}
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  {{/if}}
+</div>
