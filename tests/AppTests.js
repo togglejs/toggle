@@ -6,6 +6,7 @@ var site = require('../lib/App/Site')({
     twitter: {
         tweetButton: true,
     }
+
 });
 
 
