@@ -1,10 +1,10 @@
 {
-  "name": "tog",
+  "name": "togjs",
   "version": "0.0.0",
   "description": "",
   "main": "lib/tog.js",
   "scripts": {
-    "test": "mocha tests/*.js"
+    "test": "gulp test"
   },
   "keywords": [
     "blog",
