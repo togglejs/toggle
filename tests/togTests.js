@@ -1,7 +1,7 @@
 ﻿var expect = require('chai').expect;
-var bulp = require('../lib/bulp.js');
+var tog = require('../lib/tog.js');
 
-describe("bulp", function () {
+describe("tog", function () {
 
     [
         'joinUrl',
@@ -16,7 +16,7 @@ describe("bulp", function () {
         'wordizeSpecialChars',
     ].forEach(function (item) {
         it("should export " + item, function() {
-            expect(bulp[item]).to.be.ok;
+            expect(tog[item]).to.be.ok;
         });
     });
 

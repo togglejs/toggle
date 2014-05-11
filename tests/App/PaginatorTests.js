@@ -1,7 +1,7 @@
 ﻿var expect = require('chai').expect;
 var _ = require('lodash');
 
-var Paginator = require('../lib/App/Paginator')
+var Paginator = require('../../lib/App/Paginator')
 
 describe("Paginator", function () {
 
@@ -108,7 +108,7 @@ describe("Paginator", function () {
         });
 
         it("should not have a nextPageLink", function () {
-            expect(paginator.nextPageLink).to.equal("/blog/page/2/");
+            expect(paginator.nextPageLink).to.equal("/blog/pages/2/");
         });
 
         it("should not have a previousPageLink", function () {
@@ -145,7 +145,7 @@ describe("Paginator", function () {
             });
 
             it("should have a previousPageLink", function () {
-                expect(paginator.previousPageLink).to.equal("/blog/page/1/");
+                expect(paginator.previousPageLink).to.equal("/blog/pages/1/");
             });
 
         });
@@ -176,11 +176,11 @@ describe("Paginator", function () {
             });
 
             it("should not have a nextPageLink", function () {
-                expect(paginator.nextPageLink).to.equal("/blog/page/4/");
+                expect(paginator.nextPageLink).to.equal("/blog/pages/4/");
             });
 
             it("should have a previousPageLink", function () {
-                expect(paginator.previousPageLink).to.equal("/blog/page/2/");
+                expect(paginator.previousPageLink).to.equal("/blog/pages/2/");
             });
 
             describe("and we've changed the link prefix", function () {

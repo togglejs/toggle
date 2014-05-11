@@ -1,8 +1,8 @@
 {
-  "name": "bulp",
+  "name": "tog",
   "version": "0.0.0",
   "description": "",
-  "main": "lib/bulp.js",
+  "main": "lib/tog.js",
   "scripts": {
     "test": "mocha tests/*.js"
   },

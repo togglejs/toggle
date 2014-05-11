@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "bulpjs", "bulpjs.njsproj", "{B8821900-B48F-4D48-98EF-DD86E50D18D5}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "togjs", "togjs.njsproj", "{B8821900-B48F-4D48-98EF-DD86E50D18D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

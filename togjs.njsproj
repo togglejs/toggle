@@ -3,8 +3,8 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <Name>bulpjs</Name>
-    <RootNamespace>bulpjs</RootNamespace>
+    <Name>togjs</Name>
+    <RootNamespace>togjs</RootNamespace>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -30,8 +30,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="gulpfile.js" />
-    <Compile Include="lib\bulp-liquid.js" />
-    <Compile Include="lib\bulp.js" />
+    <Compile Include="lib\tog-liquid.js" />
+    <Compile Include="lib\tog.js" />
     <Compile Include="lib\handlebarRender.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
