@@ -5,6 +5,10 @@ var Liftoff = require('liftoff');
 var tildify = require('tildify');
 var semver = require('semver');
 var reportError = require('./utils/reportError');
+var lintConfig = require('./commands/lint').lintConfig;
+var glob = require('glob');
+var log = require('../lib/utils/log.js');
+var path = require('path');
 
 var Toggle = new Liftoff({
     name: 'toggle',
@@ -61,16 +65,14 @@ function launcher (env) {
 
     if(env.configPath) {
         process.chdir(env.configBase);
-        var config = require(env.configPath);
+        env.toggleConfig = require(env.configPath);
 
-        if(!config.paths){
-            reportError('No { paths: ...} property found in ' + env.configPath);
+        // don't lint the current folder's config if calling the built-in 'lint' command
+        if(!(process.argv && (process.argv[2]||'').toLowerCase() === 'lint')) {
+            lintConfig(env.toggleConfig, env.configPath, "ignoreFriendlyOKmsg");
         }
 
-        lintConfig(config, env.configPath);
-        processCLI(config);
-
-        //if(!config.paths.posts)
+        processCLI(env);
 
         var gulpInst = require(env.modulePath);
 
@@ -79,55 +81,43 @@ function launcher (env) {
     }
 }
 
-function lintConfig(config, configPath){
-    var errors = [
-        "\n\nThe following error(s) were found with your config in " + configPath,
-        ""
-    ];
-    if(!config.templates){
-        errors.push("{\n  templates: { } \n} is not defined");
-    }
-
-    if(!config.paths){
-        errors.push("{\n  paths: { } \n} is not defined");
-    }
-
-    if(!config.paths.posts){
-        errors.push("{\n  paths: { posts: \"??? directory ???\" } \n} is not defined");
-    }
-
-    errors.push("");
-
-    if(errors.length > 3) {
-        reportError(errors.join("\n"));
-    }
-}
 
 
-function processCLI(config){
+function processCLI(env){
 
     var program = require('commander');
+    var config = env.toggleConfig;
+
+    function loadCommand(command){
+        var c = require(command)(env);
+
+        var p = program
+          .command(c.command)
+          .description(c.description)
+          .action(c.action);
+
+        c.options.forEach(function (option) {
+            p.option(option.option, option.description);
+        })
+    };
+
 
     // TODO:
     program.version('0.0.1')
 
-    // load commands
-    require('glob')
-        .sync(__dirname + "/commands/**/*.js")
-        .forEach(function(command){
-            var c = require(command)(config);
-            //console.log(c);
+    // load built-in commands
+    glob.sync(__dirname + "/commands/**/*.js").forEach(loadCommand);
 
-            var p = program
-              .command(c.command)
-              .description(c.description)
-              .action(c.action);
+    // load custom commands
+    var customCommandsPath = config.customCLICommandsPath;
+    if(customCommandsPath) {
+        log("Loading custom commands in " + customCommandsPath);
+        glob.sync(customCommandsPath).forEach(function (cmd) {
+            log("Loading custom command: " + cmd);
 
-            c.options.forEach(function (option) {
-                p.option(option.option, option.description);
-            })
+            loadCommand(path.join(process.cwd(), "./togCommands/lint.js"));
         });
+    }
 
     program.parse(process.argv);
- //   program.help();
 }

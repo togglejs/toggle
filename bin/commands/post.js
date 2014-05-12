@@ -4,8 +4,8 @@ var fs = require('fs');
 var path = require('path');
 var moment = require('moment');
 
-module.exports = function (config) {
-
+module.exports = function (env) {
+    var config = env.toggleConfig;
     return {
         command: "post <title>",
         description: "create a new post",
