@@ -41,6 +41,7 @@
     "chalk": "^0.4.0",
     "tildify": "^0.2.0",
     "dateformat": "^1.0.7-1.2.3",
-    "semver": "^2.3.0"
+    "semver": "^2.3.0",
+    "commander": "^2.2.0"
   }
 }

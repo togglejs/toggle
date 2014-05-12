@@ -2,10 +2,9 @@
 'use strict';
 
 var Liftoff = require('liftoff');
-var gutil = require('gulp-util');
-var chalk = require('chalk');
 var tildify = require('tildify');
 var semver = require('semver');
+var reportError = require('./utils/reportError');
 
 var Toggle = new Liftoff({
     name: 'toggle',
@@ -21,6 +20,8 @@ var Toggle = new Liftoff({
 }).on('requireFail', function (name, err) {
     console.log('Unable to load:', name, err);
 });
+
+
 
 Toggle.launch(launcher);
 
@@ -40,13 +41,11 @@ function launcher (env) {
     }
 
     if (!env.modulePath) {
-        gutil.log(chalk.red('No local ' + this.moduleName + ' install found in'), chalk.magenta(tildify(env.cwd)));
-        gutil.log(chalk.red('Try running: npm install ' + this.moduleName));
-        process.exit(1);
+        reportError('No local ' + this.moduleName + '.json found in' + tildify(env.cwd) + "/n" + 'Try running: npm install ' + this.moduleName);
     }
 
     if (!env.configPath) {
-        gutil.log(chalk.red('No local ' + this.configName + '.json found in'), chalk.magenta(tildify(env.cwd)));
+        reportError('No local ' + this.configName + '.json found in' + tildify(env.cwd));
         // TODO: link out to some documentation on how create a togglefile.json
         process.exit(1);
     }
@@ -65,10 +64,11 @@ function launcher (env) {
         var config = require(env.configPath);
 
         if(!config.paths){
-            gutil.log(chalk.red('No { paths: ...} property found in ' + env.configPath), chalk.magenta(tildify(env.cwd)));
-            // TODO: link out to documentation
-            process.exit(1);
+            reportError('No { paths: ...} property found in ' + env.configPath);
         }
+
+        lintConfig(config, env.configPath);
+        processCLI(config);
 
         //if(!config.paths.posts)
 
@@ -77,4 +77,57 @@ function launcher (env) {
     } else {
         console.log('No togglefile.js found.');
     }
+}
+
+function lintConfig(config, configPath){
+    var errors = [
+        "\n\nThe following error(s) were found with your config in " + configPath,
+        ""
+    ];
+    if(!config.templates){
+        errors.push("{\n  templates: { } \n} is not defined");
+    }
+
+    if(!config.paths){
+        errors.push("{\n  paths: { } \n} is not defined");
+    }
+
+    if(!config.paths.posts){
+        errors.push("{\n  paths: { posts: \"??? directory ???\" } \n} is not defined");
+    }
+
+    errors.push("");
+
+    if(errors.length > 3) {
+        reportError(errors.join("\n"));
+    }
+}
+
+
+function processCLI(config){
+
+    var program = require('commander');
+
+    // TODO:
+    program.version('0.0.1')
+
+    // load commands
+    require('glob')
+        .sync(__dirname + "/commands/**/*.js")
+        .forEach(function(command){
+            var c = require(command)(config);
+            //console.log(c);
+
+            var p = program
+              .command(c.command)
+              .description(c.description)
+              .action(c.action);
+
+            c.options.forEach(function (option) {
+                p.option(option.option, option.description);
+            })
+        });
+
+    program.parse(process.argv);
+ //   program.help();
 }
