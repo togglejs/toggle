@@ -113,9 +113,9 @@ function processCLI(env){
     if(customCommandsPath) {
         log("Loading custom commands in " + customCommandsPath);
         glob.sync(customCommandsPath).forEach(function (cmd) {
-            log("Loading custom command: " + cmd);
-
-            loadCommand(path.join(process.cwd(), "./togCommands/lint.js"));
+            log("Loading custom command : " + cmd);
+            loadCommand(path.join(process.cwd(), cmd));
+            log("Success loading command: " + cmd);
         });
     }
 
