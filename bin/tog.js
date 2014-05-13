@@ -89,16 +89,7 @@ function processCLI(env){
     var config = env.toggleConfig;
 
     function loadCommand(command){
-        var c = require(command)(env);
-
-        var p = program
-          .command(c.command)
-          .description(c.description)
-          .action(c.action);
-
-        c.options.forEach(function (option) {
-            p.option(option.option, option.description);
-        })
+        require(command)(program, env);
     };
 
 

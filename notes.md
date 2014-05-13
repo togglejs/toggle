@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] Pagination
 - [ ] url's need to end with a "/" to avoid a redirect on the server
 - [ ] Add `gulpplugin` as a keyword in `package.json` (if this turns into a plugin)
 - [ ] how to handle 'un-published posts'?
@@ -12,7 +11,7 @@
 - [ ] Write a 'single-page-series-plugin'  (where we can create a single markdown file that can be split into multiple pages)
 - [ ] phantomjs - image-diff old site with new site?
 
-
+- [ ] 
 
 # Docs
 

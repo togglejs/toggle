@@ -37,30 +37,27 @@ function lintConfig(config, configPath, ignoreFriendlyOKmsg) {
     }
 }
 
-var exp = function (env) {
+var exp = function (program, env) {
+    program
+      .command("lint [togglefile]")
+      .description("Inspects the togglefile for any issues.")
+      .action(function (togglefile, options) {
 
-    return {
-        command: "lint [togglefile]",
-        description: "Inspects the togglefile for any issues.",
-        options: [],
-        action: function (togglefile, options) {
+          // someone passed in a specific file to check
+          if (togglefile) {
+              togglefile = path.resolve(env.configBase, togglefile);
+          } else {
+              togglefile = env.configPath;
+          }
 
-            // someone passed in a specific file to check
-            if (togglefile) {
-                togglefile = path.resolve(env.configBase, togglefile);
-            } else {
-                togglefile = env.configPath;
-            }
+          if (!togglefile || !fs.existsSync(togglefile)) {
+              reportError("Cannot find togglefile.json");
+          }
 
-            if (!togglefile || !fs.existsSync(togglefile)) {
-                reportError("Cannot find togglefile.json");
-            }
+          var config = require(togglefile);
 
-            var config = require(togglefile);
-
-            lintConfig(config, togglefile);
-        },
-    }
+          lintConfig(config, togglefile);
+      });
 };
 
 exp.lintConfig = lintConfig;
