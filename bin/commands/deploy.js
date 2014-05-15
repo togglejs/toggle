@@ -22,6 +22,13 @@ function system(cmd, callback) {
         if ((stderr || '').indexOf('Couldn\'t find remote ref master') >= 0) {
             error = null;
         }
+        if ((stderr || '').indexOf('ambiguous argument \'origin/master\': unknown revision or path not in the working tree.') >= 0) {
+            error = null;
+        }
+        if ((stderr || '').indexOf('pathspec \'\' did not match any files') >= 0) {
+            error = null;
+        }
+        
 
         if (error) {
             deferred.reject(new Error(error));
@@ -46,7 +53,12 @@ module.exports = function (program, env) {
     program
       .command("deploy")
       .description("TODO: fill in command description")
+      .option("-p, --nopush", "Do everything except push to the remote")
+      .option("-c, --nocommit", "Do everything except commit & push to the remote")
       .action(function (options) {
+
+          var nocommit = options.nocommit;
+          var nopush = options.nopush || nocommit;
 
           var deployDir = path.resolve(env.toggleConfig.paths.deploy);
           var sourceDir = env.toggleConfig.paths.source;
@@ -61,37 +73,21 @@ module.exports = function (program, env) {
                   process.chdir(cwd);
               }
 
-              function restOfWork(){
+              function copyFiles() {
+                  var deferred = Q.defer();
 
-                  gulp.src([deployDir + "**/*", "!.git{,/**}"])
-                    .pipe(clean())
+                  gulp.src(path.join(sourceDir, "**/*"))
+                      .pipe(gulp.dest(deployDir))
+                      .on('error', function (error) {
+                          deferred.reject(new Error(error));
+                      })
                       .on('end', function () {
-                          gulp.src(path.join(sourceDir, "**/*"))
-                          .pipe(gulp.dest(deployDir))
-                          .on('end', function () {
-
-                              var cwd = process.cwd();
-                              process.chdir(deployDir);
-
-                              system('git add -A')
-                                  .then(function () {
-                                      return system('git commit -m "Updated site: ' + (new Date()).toUTCString() + '"');
-                                  }).then(function () {
-                                      return system('git pull --rebase origin master');
-                                  }).then(function () {
-                                      return system('git push origin master');
-                                  }).then(function () {
-                                      process.chdir(cwd);
-                                  }).fail(function (error) {
-                                      process.chdir(cwd);
-                                      reportError(error);
-                                  });
-                          });
+                          deferred.resolve();
                       });
+
+                  return deferred.promise;
+
               }
-
-
-
 
               // setup deploy folder.
               if (!fs.existsSync(deployDir)) {
@@ -99,13 +95,6 @@ module.exports = function (program, env) {
                   fs.mkdirSync(deployDir, 0777, true);
               }
 
-              function gitInit() {
-                  return ;
-              }
-
-              function gitRemoteAdd(callback) {
-                  return ;
-              }
 
               var cwd = process.cwd();
               process.chdir(deployDir);
@@ -115,22 +104,42 @@ module.exports = function (program, env) {
               if (!fs.existsSync(path.join(deployDir, ".git"))) {
                   promise = system("git init")
               } else {
-                  var dfr = Q.defer();
-                  dfr.resolve();
-                  promise = dfr.promise;
+                  promise = Q.resolve();
               }
 
               promise
                   .then(function () {
                       return system("git remote add origin " + deployGit);
                   }).then(function () {
+                      return system('git fetch origin');
+                  }).then(function () {
+                      return system('git reset origin/master --hard');
+                  }).then(function () {
+                      return system('git rm --cached -r .');
+                  }).then(function () {
+                      return system('git clean -fd');
+                  }).then(function () {
                       process.chdir(cwd);
-                      return restOfWork();
+                      return copyFiles();
+                  }).then(function () {
+                      process.chdir(deployDir);
+                      return system('git add -A')
+                  }).then(function () {
+                      if (nocommit) {
+                          return Q.resolve();
+                      }
+                      return system('git commit -m "Updated site: ' + (new Date()).toUTCString() + '"');
+                  }).then(function () {
+                      if (nopush) {
+                          return Q.resolve();
+                      }
+                      return system('git push origin master');
+                  }).then(function () {
+                      process.chdir(cwd);
                   }).fail(function (error) {
                       process.chdir(cwd);
                       reportError(error);
                   });
-
 
           } else {
               throw "Unknown deploy type [" + deployType + "]";
