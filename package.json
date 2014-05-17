@@ -1,7 +1,7 @@
 {
   "name": "toggle",
   "version": "0.0.0",
-  "description": "",
+  "description": "Some helpers and utilities to toggle on your blog or website",
   "main": "lib/tog.js",
   "scripts": {
     "test": "gulp test"
