@@ -1,12 +1,9 @@
 {{#if github.username }}
 <section>
-  <h1>GitHub Repos</h1>
+  <h1>GitHub{{#if github.showProfileLink }}: <a href="https://github.com/{{github.username}}">@{{github.username}}</a>{{/if}}</h1>
   <ul id="gh_repos">
     <li class="loading">Status updating...</li>
   </ul>
-  {{#if github.showProfileLink }}
-  <a href="https://github.com/{{github.username}}">@{{github.username}}</a> on GitHub
-  {{/if}}
   <script type="text/javascript">
     $(document).ready(function(){
         if (!window.jXHR){

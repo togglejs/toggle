@@ -1,5 +1,5 @@
 {{#if date}}
-  <time datetime="{{date_to_xmlschema date}}" pubdate{{#if updated }} data-updated="true" {{/if}}>{{formatDate date }}</time>
+  <time datetime="{{date_to_xmlschema date}}" pubdate data-updated="true">{{formatDate date }}</time>
 {{/if}}
 
 {{#if was_updated }}

@@ -11,8 +11,6 @@
 - [ ] Write a 'single-page-series-plugin'  (where we can create a single markdown file that can be split into multiple pages)
 - [ ] phantomjs - image-diff old site with new site?
 
-- [ ] 
-
 # Docs
 
 - Dates should be a [momentjs](http://momentjs.com/) date.
