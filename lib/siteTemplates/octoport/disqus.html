@@ -1,7 +1,7 @@
 {{#comment}} Load script if disquss comments are enabled and `page.comments` is either empty (index) or set to true {{/comment}}
 {{#if disqus.show}}<script type="text/javascript">
       var disqus_shortname = '{{ disqus.shortName }}';
-      {{#if comments}}{{#comment}} `page.comments` can be only be set to true on pages/posts, so we embed the comments here. {{/comment}}
+      {{#if showComments}}{{#comment}} `page.comments` can be only be set to true on pages/posts, so we embed the comments here. {{/comment}}
         // var disqus_developer = 1;
         var disqus_identifier = '{{fullUrl url }}';
         var disqus_url = '{{fullUrl this}}';
