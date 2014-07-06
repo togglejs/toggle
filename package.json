@@ -17,7 +17,7 @@
   "license": "MIT",
   "devDependencies": {
     "gulp": "~3.6.1",
-    "approvals": "0.0.12",
+    "approvals": "0.0.19",
     "js-yaml": "~3.0.2",
     "gulp-markdown": "^0.1.2",
     "liquid-node": "^0.2.0",
