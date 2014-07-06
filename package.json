@@ -14,6 +14,18 @@
     "tog": "./bin/tog.js"
   },
   "author": "Jason Jarrett",
+"contributors": [
+    {
+      "name": "Jason Jarrett (http://staxmanade.com)"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/togglejs/toggle.git"
+  },
+  "bugs": {
+    "url": "https://github.com/togglejs/toggle/issues"
+  },
   "license": "MIT",
   "devDependencies": {
     "gulp": "~3.6.1",
