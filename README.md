@@ -8,7 +8,7 @@ It's a library that contains a blog 'model' and a set of gulp helpers to assist 
 
 I should have :) - but I wanted to learn [GulpJS](http://gulpjs.com) and just hack on something.
 
-# But your site looks just like [Octopress](http://octopress.org)
+# Why does your site looks just like an [Octopress](http://octopress.org) site?
 
 I wrote a series on how to migrate from Blogspot to Octopres and then struggled to [get my series](https://github.com/jekyll/jekyll/issues/2226) to look the way I wanted and quickly found myself wanting to hack on something (not in Ruby). So I ported my OctoPress site to a static nodejs generated site leveraging Gulp and this set of libraries grew out of it.
 
