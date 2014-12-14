@@ -1,5 +1,6 @@
-﻿var reportError = require('../utils/reportError');
-var log = require('../../lib/utils/log.js');
+'use strict';
+var reportError = require('../util/reportError');
+var log = require('../../lib/util/log.js');
 var fs = require('fs');
 var path = require('path');
 var moment = require('moment');
@@ -22,7 +23,7 @@ module.exports = function (program, env) {
           var template = options.template || "post";
 
           log("Using template " + template);
-            
+
           var templatePath = config.templates[template];
           if (!templatePath || !fs.existsSync(templatePath)) {
               reportError("Cannot find template defined in config under { templates[" + template + "] = " + templatePath + " }.");
@@ -51,7 +52,7 @@ module.exports = function (program, env) {
           fs.writeFileSync(outPath, postTemplate);
 
           // try to handle an after post created command
-          // TODO: this doesn't correclty spawn - as it leaves our 
+          // TODO: this doesn't correclty spawn - as it leaves our
           // command stuck waiting for process to complete?
           if (posts.afterPostCreated && posts.afterPostCreated.command) {
               var childProcess = require('child_process');

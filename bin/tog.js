@@ -4,10 +4,10 @@
 var Liftoff = require('liftoff');
 var tildify = require('tildify');
 var semver = require('semver');
-var reportError = require('./utils/reportError');
+var reportError = require('./util/reportError');
 var lintConfig = require('./commands/lint').lintConfig;
 var glob = require('glob');
-var log = require('../lib/utils/log.js');
+var log = require('../lib/util/log.js');
 var path = require('path');
 var chalk = require('chalk');
 

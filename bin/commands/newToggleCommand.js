@@ -1,8 +1,7 @@
-﻿var reportError = require('../utils/reportError');
-var log = require('../../lib/utils/log.js');
+var reportError = require('../util/reportError');
+var log = require('../../lib/util/log.js');
 var fs = require('fs');
 var path = require('path');
-var moment = require('moment');
 
 module.exports = function (program, env) {
     program
@@ -14,7 +13,7 @@ module.exports = function (program, env) {
               reportError("Cannot find folder [" + folder + "] to save sample command plugin.");
           }
 
-          var cmdText = fs.readFileSync(path.join(__dirname, "../utils/sampleCommand.js")).toString();
+          var cmdText = fs.readFileSync(path.join(__dirname, "../util/sampleCommand.js")).toString();
           cmdText = cmdText.replace(/{{name}}/g, name);
 
           var outFile = path.join(folder, name + '.js');

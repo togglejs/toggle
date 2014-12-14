@@ -1,13 +1,13 @@
-﻿var path = require('path');
+'use strict';
+var path = require('path');
 var fs = require('node-fs');
-var log = require('../../lib/utils/log.js');
-var reportError = require('../utils/reportError');
+var log = require('../../lib/util/log.js');
+var reportError = require('../util/reportError');
 var gulp = require('gulp');
-var clean = require('gulp-clean');
 var exec = require('child_process').exec;
 var Q = require('q');
 
-function system(cmd, callback) {
+function system(cmd) {
     var deferred = Q.defer();
     log("system: " + cmd);
     child = exec(cmd, function (error, stdout, stderr) {
@@ -28,7 +28,7 @@ function system(cmd, callback) {
         if ((stderr || '').indexOf('pathspec \'\' did not match any files') >= 0) {
             error = null;
         }
-        
+
 
         if (error) {
             deferred.reject(new Error(error));
@@ -44,10 +44,10 @@ module.exports = function (program, env) {
 
     /*
      * TODO: document what env has that may be useful to a plugin develoepr.
-     * 
+     *
      * toggle leverages https://www.npmjs.org/package/commander for it's commands
      * You can review it's API https://github.com/visionmedia/commander.js to extend toggle with your own commands.
-     * 
+     *
      */
 
     program

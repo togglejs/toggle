@@ -1,8 +1,7 @@
-﻿var reportError = require('../utils/reportError');
-var log = require('../../lib/utils/log.js');
+var reportError = require('../util/reportError');
+var log = require('../../lib/util/log.js');
 var fs = require('fs');
 var path = require('path');
-var moment = require('moment');
 
 function lintConfig(config, configPath, ignoreFriendlyOKmsg) {
     var errors = [

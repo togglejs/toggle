@@ -1,8 +1,9 @@
+'use strict';
 require('approvals').configure({
     reporters: ["visualstudio", "opendiff"]
 }).mocha(__dirname);
 
-var joinUrl = require("../lib/joinUrl");
+var joinUrl = require("../lib/util/joinUrl");
 
 it('can join url\'s ', function () {
 
@@ -72,6 +73,6 @@ it('can join url\'s ', function () {
 
         return item;
     });
-        
+
     this.verifyAsJSON(result);
 });
