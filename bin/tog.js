@@ -9,6 +9,7 @@ var lintConfig = require('./commands/lint').lintConfig;
 var glob = require('glob');
 var log = require('../lib/utils/log.js');
 var path = require('path');
+var chalk = require('chalk');
 
 var Toggle = new Liftoff({
     name: 'toggle',
@@ -27,9 +28,7 @@ var Toggle = new Liftoff({
 
 
 
-Toggle.launch(launcher);
-
-function launcher (env) {
+var launcher = function (env) {
     if(env.argv.verbose) {
         console.log('LIFTOFF SETTINGS:', this);
         console.log('CLI OPTIONS:', env.argv);
@@ -58,9 +57,9 @@ function launcher (env) {
 
     // check for semver difference between cli and local installation
     if (semver.gt(cliPackage.version, env.modulePackage.version)) {
-        gutil.log(chalk.red('Warning: ' + this.moduleName + ' version mismatch:'));
-        gutil.log(chalk.red('Running ' + this.moduleName + ' is', cliPackage.version));
-        gutil.log(chalk.red('Local ' + this.moduleName + ' (installed in dir) is', env.modulePackage.version));
+        console.log(chalk.red('Warning: ' + this.moduleName + ' version mismatch:'));
+        console.log(chalk.red('Running ' + this.moduleName + ' is', cliPackage.version));
+        console.log(chalk.red('Local ' + this.moduleName + ' (installed in dir) is', env.modulePackage.version));
     }
 
     if(env.configPath) {
@@ -79,7 +78,7 @@ function launcher (env) {
     } else {
         console.log('No togglefile.js found.');
     }
-}
+};
 
 
 
@@ -88,13 +87,13 @@ function processCLI(env){
     var program = require('commander');
     var config = env.toggleConfig;
 
-    function loadCommand(command){
+    var loadCommand = function (command){
         require(command)(program, env);
     };
 
 
     // TODO:
-    program.version('0.0.1')
+    program.version('0.0.1');
 
     // load built-in commands
     glob.sync(__dirname + "/commands/**/*.js").forEach(loadCommand);
@@ -102,13 +101,23 @@ function processCLI(env){
     // load custom commands
     var customCommandsPath = config.customCLICommandsPath;
     if(customCommandsPath) {
-        log("Loading custom commands in " + customCommandsPath);
+        var loggedFirstCustomCommand = false;
         glob.sync(customCommandsPath).forEach(function (cmd) {
+            if(!loggedFirstCustomCommand) {
+              loggedFirstCustomCommand = true;
+              log("Found custom commands" + customCommandsPath);
+            }
             log("Loading custom command : " + cmd);
             loadCommand(path.join(process.cwd(), cmd));
             log("Success loading command: " + cmd);
         });
     }
 
-    program.parse(process.argv);
+    if(process.argv.length === 2) {
+      program.help();
+    } else {
+      program.parse(process.argv);
+    }
 }
+
+Toggle.launch(launcher);
