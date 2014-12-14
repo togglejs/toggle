@@ -12,7 +12,6 @@ describe("tog", function () {
         'description',
         'site',
         'alias',
-        'filterext',
         'wordizeSpecialChars',
         'loadHandlebarTheme',
     ].forEach(function (item) {
