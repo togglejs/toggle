@@ -1,10 +1,11 @@
+'use strict';
 require('approvals').configure({
     reporters: ["visualstudio", "opendiff"]
 }).mocha(__dirname);
 
 var expect = require('chai').expect;
 
-var wordizeSpecialChars = require("../lib/wordizeSpecialChars");
+var wordizeSpecialChars = require("../lib/util/wordizeSpecialChars");
 
 describe('replaces special charasters ', function () {
 
@@ -32,7 +33,7 @@ describe('replaces special charasters ', function () {
             expected: "_", args: "/",
         },
 
-    ]
+    ];
 
     strs.forEach(function (item) {
 

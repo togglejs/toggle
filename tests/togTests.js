@@ -6,6 +6,8 @@ describe("tog", function () {
 
     [
         'util.joinUrl',
+        'util.wordizeSpecialChars',
+
         'liquid',
         'loadHandlebarTemplate',
         'templatesHelper',
@@ -13,7 +15,6 @@ describe("tog", function () {
         'description',
         'site',
         'alias',
-        'wordizeSpecialChars',
         'loadHandlebarTheme',
     ].forEach(function (item) {
         it("should export " + item, function() {
