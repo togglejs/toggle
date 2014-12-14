@@ -1,3 +1,4 @@
+'use strict';
 var reportError = require('../util/reportError');
 var log = require('../../lib/util/log.js');
 var fs = require('fs');

@@ -10,7 +10,7 @@ var Q = require('q');
 function system(cmd) {
     var deferred = Q.defer();
     log("system: " + cmd);
-    child = exec(cmd, function (error, stdout, stderr) {
+    exec(cmd, function (error, stdout, stderr) {
 
         if ((stdout || '').indexOf('nothing to commit, working directory clean') >= 0) {
             error = null;
@@ -65,15 +65,13 @@ module.exports = function (program, env) {
           var deployType = env.toggleConfig.deployType;
           var deployGit = env.toggleConfig.deployGitUrl;
 
-          var cwd = process.cwd();
-
           if (deployType === "githubpages") {
 
-              function returnError() {
-                  process.chdir(cwd);
-              }
+              // var returnError = function () {
+              //     process.chdir(cwd);
+              // };
 
-              function copyFiles() {
+              var copyFiles = function () {
                   var deferred = Q.defer();
 
                   gulp.src(path.join(sourceDir, "**/*"))
@@ -87,12 +85,12 @@ module.exports = function (program, env) {
 
                   return deferred.promise;
 
-              }
+              };
 
               // setup deploy folder.
               if (!fs.existsSync(deployDir)) {
-                  log("Deploy directory [" + deployDir + "] did not exist. Creating it...")
-                  fs.mkdirSync(deployDir, 0777, true);
+                  log("Deploy directory [" + deployDir + "] did not exist. Creating it...");
+                  fs.mkdirSync(deployDir, parseInt(777, 8), true);
               }
 
 
@@ -102,7 +100,7 @@ module.exports = function (program, env) {
               // setup git.
               var promise;
               if (!fs.existsSync(path.join(deployDir, ".git"))) {
-                  promise = system("git init")
+                  promise = system("git init");
               } else {
                   promise = Q.resolve();
               }
@@ -123,7 +121,7 @@ module.exports = function (program, env) {
                       return copyFiles();
                   }).then(function () {
                       process.chdir(deployDir);
-                      return system('git add -A')
+                      return system('git add -A');
                   }).then(function () {
                       if (nocommit) {
                           return Q.resolve();

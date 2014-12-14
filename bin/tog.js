@@ -74,6 +74,7 @@ var launcher = function (env) {
 
         processCLI(env);
 
+        // TODO: not sure why this is here - it it necessary?
         var gulpInst = require(env.modulePath);
 
     } else {

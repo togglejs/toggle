@@ -1,3 +1,4 @@
+'use strict';
 var reportError = require('../util/reportError');
 var log = require('../../lib/util/log.js');
 var fs = require('fs');
@@ -31,7 +32,7 @@ function lintConfig(config, configPath, ignoreFriendlyOKmsg) {
         reportError(errors.join("\n"));
     } else {
         if (!ignoreFriendlyOKmsg) {
-            log("togglefile [" + configPath + "] looks to be in good shape!")
+            log("togglefile [" + configPath + "] looks to be in good shape!");
         }
     }
 }
