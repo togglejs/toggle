@@ -8,3 +8,7 @@ notes.html
 README.html
 
 .DS_Store
+
+
+#istanbul code coverage output
+coverage/
