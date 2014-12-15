@@ -41,7 +41,7 @@ var exp = function (program, env) {
   program
     .command('lint [togglefile]')
     .description('Inspects the togglefile for any issues.')
-    .action(function (togglefile, options) {
+    .action(function (togglefile, options) { //jshint ignore:line
 
       // someone passed in a specific file to check
       if (togglefile) {

@@ -72,7 +72,7 @@ var launcher = function (env) {
     processCLI(env);
 
     // TODO: not sure why this is here - it it necessary?
-    var gulpInst = require(env.modulePath);
+    var gulpInst = require(env.modulePath);  //jshint ignore:line
 
   } else {
     console.log('No togglefile.js found.');

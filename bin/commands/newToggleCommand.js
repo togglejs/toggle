@@ -4,11 +4,11 @@ var log = require('../../lib/util/log.js');
 var fs = require('fs');
 var path = require('path');
 
-module.exports = function (program, env) {
+module.exports = function (program, env) { //jshint ignore:line
   program
     .command('newToggleCommand <toggleComandsFolder> <name>')
     .description('Can generate a new sample command that allows you to use tog to load and execute.')
-    .action(function (folder, name, options) {
+    .action(function (folder, name, options) { //jshint ignore:line
 
       if (!fs.existsSync(folder)) {
         reportError('Cannot find folder [' + folder + '] to save sample command plugin.');

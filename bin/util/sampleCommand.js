@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function (program, env) {
+module.exports = function (program, env) { //jshint ignore:line
 
   /*
    * TODO: document what env has that may be useful to a plugin develoepr.
@@ -13,7 +13,7 @@ module.exports = function (program, env) {
     .command('{{name}} <sampleRequiredParameter> [sampleOptionalParameter]')
     .description('TODO: fill in command description')
     .option('-o, --option <someOption>', 'TODO: add optional command options...')
-    .action(function (sampleRequiredParameter, sampleOptionalParameter, options) {
+    .action(function (sampleRequiredParameter, sampleOptionalParameter, options) { //jshint ignore:line
       console.log('HELLO WORLD!');
       console.log('sampleRequiredParameter:' + sampleRequiredParameter);
       console.log('sampleOptionalParameter: ' + sampleOptionalParameter);
