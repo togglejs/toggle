@@ -1,5 +1,5 @@
 'use strict';
-var log = require('../../lib/utils/log');
+var log = require('../../lib/util/log');
 var chalk = require('chalk');
 
 module.exports = function (msg) {
