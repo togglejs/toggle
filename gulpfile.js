@@ -21,7 +21,6 @@ if (process.env.CI) {
 
 gulp.task('default', ['test']);
 
-
 gulp.task('lint', function () {
   return gulp.src(paths.lint)
     .pipe($.jshint('.jshintrc'))
@@ -32,7 +31,6 @@ gulp.task('lint', function () {
 
 gulp.task('istanbul', function (cb) {
   gulp.src(paths.source)
-  .pipe($.debug())
   .pipe($.istanbul()) // Covering files
   .pipe($.istanbul.hookRequire())
   .on('finish', function () {

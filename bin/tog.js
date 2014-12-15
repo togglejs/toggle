@@ -11,115 +11,109 @@ var log = require('../lib/util/log.js');
 var path = require('path');
 var chalk = require('chalk');
 
-
 var Toggle = new Liftoff({
-    name: 'toggle',
-    //  localDeps: ['hacker'],     // these are assigned
-    //  configName: 'hackerfile',  // automatically by
-    //  processTitle: 'hacker',    // the "name" option
-    cwdOpt: 'cwd',
-    requireOpt: 'require'
+  name: 'toggle',
+  //  localDeps: ['hacker'],     // these are assigned
+  //  configName: 'hackerfile',  // automatically by
+  //  processTitle: 'hacker',    // the 'name' option
+  cwdOpt: 'cwd',
+  requireOpt: 'require'
 }).on('require', function (name, module) {
-    if (name === 'coffee-script') {
-        module.register();
-    }
+  if (name === 'coffee-script') {
+    module.register();
+  }
 }).on('requireFail', function (name, err) {
-    console.log('Unable to load:', name, err);
+  console.log('Unable to load:', name, err);
 });
 
-
-
 var launcher = function (env) {
-    if(env.argv.verbose) {
-        console.log('LIFTOFF SETTINGS:', this);
-        console.log('CLI OPTIONS:', env.argv);
-        console.log('CWD:', env.cwd);
-        console.log('LOCAL MODULES PRELOADED:', env.preload);
-        console.log('EXTENSIONS RECOGNIZED:', env.validExtensions);
-        console.log('SEARCHING FOR:', env.configNameRegex);
-        console.log('FOUND CONFIG AT:',  env.configPath);
-        console.log('CONFIG BASE DIR:', env.configBase);
-        console.log('YOUR LOCAL MODULE IS LOCATED:', env.modulePath);
-        console.log('LOCAL PACKAGE.JSON:', env.modulePackage);
-        console.log('CLI PACKAGE.JSON', require('../package'));
+  if (env.argv.verbose) {
+    console.log('LIFTOFF SETTINGS:', this);
+    console.log('CLI OPTIONS:', env.argv);
+    console.log('CWD:', env.cwd);
+    console.log('LOCAL MODULES PRELOADED:', env.preload);
+    console.log('EXTENSIONS RECOGNIZED:', env.validExtensions);
+    console.log('SEARCHING FOR:', env.configNameRegex);
+    console.log('FOUND CONFIG AT:',  env.configPath);
+    console.log('CONFIG BASE DIR:', env.configBase);
+    console.log('YOUR LOCAL MODULE IS LOCATED:', env.modulePath);
+    console.log('LOCAL PACKAGE.JSON:', env.modulePackage);
+    console.log('CLI PACKAGE.JSON', require('../package'));
+  }
+
+  if (!env.modulePath) {
+    reportError('No local ' + this.moduleName + '.json found in' + tildify(env.cwd) + '/n' + 'Try running: npm install ' + this.moduleName);
+  }
+
+  if (!env.configPath) {
+    reportError('No local ' + this.configName + '.json found in' + tildify(env.cwd));
+    // TODO: link out to some documentation on how create a togglefile.json
+    process.exit(1);
+  }
+
+  var cliPackage = require('../package');
+
+  // check for semver difference between cli and local installation
+  if (semver.gt(cliPackage.version, env.modulePackage.version)) {
+    console.log(chalk.red('Warning: ' + this.moduleName + ' version mismatch:'));
+    console.log(chalk.red('Running ' + this.moduleName + ' is', cliPackage.version));
+    console.log(chalk.red('Local ' + this.moduleName + ' (installed in dir) is', env.modulePackage.version));
+  }
+
+  if (env.configPath) {
+    process.chdir(env.configBase);
+    env.toggleConfig = require(env.configPath);
+
+    // don't lint the current folder's config if calling the built-in 'lint' command
+    if (!(process.argv && (process.argv[2]||'').toLowerCase() === 'lint')) {
+      lintConfig(env.toggleConfig, env.configPath, 'ignoreFriendlyOKmsg');
     }
 
-    if (!env.modulePath) {
-        reportError('No local ' + this.moduleName + '.json found in' + tildify(env.cwd) + "/n" + 'Try running: npm install ' + this.moduleName);
-    }
+    processCLI(env);
 
-    if (!env.configPath) {
-        reportError('No local ' + this.configName + '.json found in' + tildify(env.cwd));
-        // TODO: link out to some documentation on how create a togglefile.json
-        process.exit(1);
-    }
+    // TODO: not sure why this is here - it it necessary?
+    var gulpInst = require(env.modulePath);
 
-    var cliPackage = require('../package');
-
-    // check for semver difference between cli and local installation
-    if (semver.gt(cliPackage.version, env.modulePackage.version)) {
-        console.log(chalk.red('Warning: ' + this.moduleName + ' version mismatch:'));
-        console.log(chalk.red('Running ' + this.moduleName + ' is', cliPackage.version));
-        console.log(chalk.red('Local ' + this.moduleName + ' (installed in dir) is', env.modulePackage.version));
-    }
-
-    if(env.configPath) {
-        process.chdir(env.configBase);
-        env.toggleConfig = require(env.configPath);
-
-        // don't lint the current folder's config if calling the built-in 'lint' command
-        if(!(process.argv && (process.argv[2]||'').toLowerCase() === 'lint')) {
-            lintConfig(env.toggleConfig, env.configPath, "ignoreFriendlyOKmsg");
-        }
-
-        processCLI(env);
-
-        // TODO: not sure why this is here - it it necessary?
-        var gulpInst = require(env.modulePath);
-
-    } else {
-        console.log('No togglefile.js found.');
-    }
+  } else {
+    console.log('No togglefile.js found.');
+  }
 };
-
-
 
 function processCLI(env){
 
-    var program = require('commander');
-    var config = env.toggleConfig;
+  var program = require('commander');
+  var config = env.toggleConfig;
 
-    var loadCommand = function (command){
-        require(command)(program, env);
-    };
+  var loadCommand = function (command){
+    require(command)(program, env);
+  };
 
+  // TODO:
+  program.version('0.0.1');
 
-    // TODO:
-    program.version('0.0.1');
+  // load built-in commands
+  glob.sync(__dirname + '/commands/**/*.js').forEach(loadCommand);
 
-    // load built-in commands
-    glob.sync(__dirname + "/commands/**/*.js").forEach(loadCommand);
+  // load custom commands
+  var customCommandsPath = config.customCLICommandsPath;
+  if (customCommandsPath) {
+    var loggedFirstCustomCommand = false;
+    glob.sync(customCommandsPath).forEach(function (cmd) {
+      if (!loggedFirstCustomCommand) {
+        loggedFirstCustomCommand = true;
+        log('Found custom commands' + customCommandsPath);
+      }
+      log('Loading custom command : ' + cmd);
+      loadCommand(path.join(process.cwd(), cmd));
+      log('Success loading command: ' + cmd);
+    });
+  }
 
-    // load custom commands
-    var customCommandsPath = config.customCLICommandsPath;
-    if(customCommandsPath) {
-        var loggedFirstCustomCommand = false;
-        glob.sync(customCommandsPath).forEach(function (cmd) {
-            if(!loggedFirstCustomCommand) {
-              loggedFirstCustomCommand = true;
-              log("Found custom commands" + customCommandsPath);
-            }
-            log("Loading custom command : " + cmd);
-            loadCommand(path.join(process.cwd(), cmd));
-            log("Success loading command: " + cmd);
-        });
-    }
-
-    if(process.argv.length === 2) {
-      program.help();
-    } else {
-      program.parse(process.argv);
-    }
+  if (process.argv.length === 2) {
+    program.help();
+  } else {
+    program.parse(process.argv);
+  }
 }
 
 Toggle.launch(launcher);
