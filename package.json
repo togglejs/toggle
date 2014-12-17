@@ -12,7 +12,7 @@
     "static"
   ],
   "bin": {
-    "tog": "./bin/tog.js"
+    "tog": "./bin/index.js"
   },
   "author": "Jason Jarrett",
   "contributors": [
