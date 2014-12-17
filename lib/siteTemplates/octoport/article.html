@@ -1,6 +1,6 @@
 {{#if page_header }}
   <header>
-    <h1 class="entry-title"><a href="{{fullUrl this }}">{{#if titlecase }}{{titlecase title }}{{else}}{{ title }}{{/if}}</a></h1>
+    <h1 class="entry-title"><a href="{{fullUrl url }}">{{#if titlecase }}{{titlecase title }}{{else}}{{ title }}{{/if}}</a></h1>
     {{#if page_meta }}
     <p class="meta">
         {{#if date }}{{{include "post/date" }}}{{ time }}{{/if}}
@@ -10,4 +10,3 @@
 </header>
 {{/if}}
 <div class="entry-content">{{{ contents }}}</div>
-

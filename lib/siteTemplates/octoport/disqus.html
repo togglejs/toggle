@@ -4,7 +4,7 @@
       {{#if showComments}}{{#comment}} `page.comments` can be only be set to true on pages/posts, so we embed the comments here. {{/comment}}
         // var disqus_developer = 1;
         var disqus_identifier = '{{fullUrl url }}';
-        var disqus_url = '{{fullUrl this}}';
+        var disqus_url = '{{fullUrl rul}}';
         var disqus_script = 'embed.js';
       {{else}}{{#comment}} As `page.comments` is empty, we must be on the index page. {{/comment}}
         var disqus_script = 'count.js';
