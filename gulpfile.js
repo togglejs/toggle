@@ -36,7 +36,7 @@ gulp.task('coverage', function (cb) {
   .on('finish', function () {
     gulp.src(paths.tests)
     .pipe($.plumber(plumberConfig))
-    .pipe($.mocha())
+    .pipe($.mocha({ reporter:'dot' }))
     .pipe($.istanbul.writeReports()) // Creating the reports after tests ran
     .on('finish', function() {
       process.chdir(__dirname);
