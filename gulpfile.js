@@ -29,7 +29,7 @@ gulp.task('lint', function () {
     .pipe($.jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('istanbul', function (cb) {
+gulp.task('coverage', function (cb) {
   gulp.src(paths.source)
   .pipe($.istanbul()) // Covering files
   .pipe($.istanbul.hookRequire())
@@ -49,6 +49,6 @@ gulp.task('watch', ['test'], function () {
   gulp.watch(paths.watch, ['test']);
 });
 
-gulp.task('test', ['lint', 'istanbul']);
+gulp.task('test', ['lint', 'coverage']);
 
 gulp.task('default', ['test']);
