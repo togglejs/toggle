@@ -23,22 +23,22 @@ var Toggle = new Liftoff({
     module.register();
   }
 }).on('requireFail', function (name, err) {
-  console.log('Unable to load:', name, err);
+  log('Unable to load:', name, err);
 });
 
 var launcher = function (env) {
   if (env.argv.verbose) {
-    console.log('LIFTOFF SETTINGS:', this);
-    console.log('CLI OPTIONS:', env.argv);
-    console.log('CWD:', env.cwd);
-    console.log('LOCAL MODULES PRELOADED:', env.preload);
-    console.log('EXTENSIONS RECOGNIZED:', env.validExtensions);
-    console.log('SEARCHING FOR:', env.configNameRegex);
-    console.log('FOUND CONFIG AT:',  env.configPath);
-    console.log('CONFIG BASE DIR:', env.configBase);
-    console.log('YOUR LOCAL MODULE IS LOCATED:', env.modulePath);
-    console.log('LOCAL PACKAGE.JSON:', env.modulePackage);
-    console.log('CLI PACKAGE.JSON', require('../package'));
+    log('LIFTOFF SETTINGS:', this);
+    log('CLI OPTIONS:', env.argv);
+    log('CWD:', env.cwd);
+    log('LOCAL MODULES PRELOADED:', env.preload);
+    log('EXTENSIONS RECOGNIZED:', env.validExtensions);
+    log('SEARCHING FOR:', env.configNameRegex);
+    log('FOUND CONFIG AT:',  env.configPath);
+    log('CONFIG BASE DIR:', env.configBase);
+    log('YOUR LOCAL MODULE IS LOCATED:', env.modulePath);
+    log('LOCAL PACKAGE.JSON:', env.modulePackage);
+    log('CLI PACKAGE.JSON', require('../package'));
   }
 
   if (!env.modulePath) {
@@ -75,7 +75,7 @@ var launcher = function (env) {
     var gulpInst = require(env.modulePath);  //jshint ignore:line
 
   } else {
-    console.log('No togglefile.js found.');
+    log('No togglefile.js found.');
   }
 };
 
