@@ -64,7 +64,6 @@
     "semver": "^2.3.0",
     "commander": "^2.2.0",
     "node-fs": "^0.1.7",
-    "gulp-clean": "^0.2.4",
     "q": "^1.0.1",
     "coveralls": "^2.11.2"
   }

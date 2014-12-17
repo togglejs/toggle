@@ -1,4 +1,6 @@
-﻿var expect = require('chai').expect;
+'use strict';
+
+var expect = require('chai').expect;
 var _ = require('lodash');
 
 var site = require('../lib/App/Site')({
@@ -43,7 +45,7 @@ postB.url = "/postb_url";
 site.addFile(postB);
 
 var seriesPost1 = {};
-seriesPost1.seriesTitle = "Introduction"
+seriesPost1.seriesTitle = "Introduction";
 seriesPost1.published = true;
 seriesPost1._date = new Date(2010, 2, 1);
 seriesPost1.seriesId = 'sample-series';
