@@ -26,6 +26,14 @@ var Toggle = new Liftoff({
   log('Unable to load:', name, err);
 });
 
+var printHelpMessage = function(program, cliVersion, moduleVersion) {
+
+  console.log("tog v" + cliVersion + " local module v" + moduleVersion);
+  program.help();
+
+};
+
+
 var launcher = function (env) {
   if (env.argv.verbose) {
     log('LIFTOFF SETTINGS:', this);
@@ -69,7 +77,7 @@ var launcher = function (env) {
       lintConfig(env.toggleConfig, env.configPath, 'ignoreFriendlyOKmsg');
     }
 
-    processCLI(env);
+    processCLI(env, cliPackage.version, env.modulePackage.version);
 
     // TODO: not sure why this is here - it it necessary?
     var gulpInst = require(env.modulePath);  //jshint ignore:line
@@ -79,17 +87,20 @@ var launcher = function (env) {
   }
 };
 
-function processCLI(env){
+function processCLI(env, cliVersion, moduleVersion){
 
   var program = require('commander');
   var config = env.toggleConfig;
+  program.version(cliVersion);
 
-  var loadCommand = function (command){
-    require(command)(program, env);
+  
+  var loadCommand = function (command) {
+    try {
+      require(command)(program, env);
+    } catch (variable) {
+      console.log(chalk.red("Failed to load command: " + command + "\nError: " + variable));
+    }
   };
-
-  // TODO:
-  program.version('0.0.1');
 
   // load built-in commands
   glob.sync(__dirname + '/commands/**/*.js').forEach(loadCommand);
@@ -110,7 +121,7 @@ function processCLI(env){
   }
 
   if (process.argv.length === 2) {
-    program.help();
+    printHelpMessage(program,  cliVersion, moduleVersion);
   } else {
     program.parse(process.argv);
   }
