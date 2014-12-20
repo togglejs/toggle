@@ -28,11 +28,10 @@ var Toggle = new Liftoff({
 
 var printHelpMessage = function(program, cliVersion, moduleVersion) {
 
-  console.log("tog v" + cliVersion + " local module v" + moduleVersion);
+  console.log('tog v' + cliVersion + ' local module v' + moduleVersion);
   program.help();
 
 };
-
 
 var launcher = function (env) {
   if (env.argv.verbose) {
@@ -93,12 +92,11 @@ function processCLI(env, cliVersion, moduleVersion){
   var config = env.toggleConfig;
   program.version(cliVersion);
 
-  
   var loadCommand = function (command) {
     try {
       require(command)(program, env);
     } catch (variable) {
-      console.log(chalk.red("Failed to load command: " + command + "\nError: " + variable));
+      console.log(chalk.red('Failed to load command: ' + command + '\nError: ' + variable));
     }
   };
 
