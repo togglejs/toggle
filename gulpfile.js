@@ -3,7 +3,15 @@
 var gulp = require('gulp');
 var gulp   = require('gulp');
 var $ = require('gulp-load-plugins')();
-var exec = require('shelljs').exec;
+var shelljs = require('shelljs');
+var exec = function (cmd) {
+  console.log("Running command: " + cmd);
+  var result = shelljs.exec(cmd);
+  if(result.code !== 0) {
+    console.error("Error running command: " + cmd);
+    throw JSON.stringify(result);
+  }
+};
 
 var plumberConfig = {};
 
@@ -23,7 +31,9 @@ if (process.env.CI) {
 gulp.task('default', ['test']);
 
 gulp.task('docs', function () {
-  exec('doxx --source lib && open docs/index.html');
+  exec('pushd ../togglejs.github.io/ && git reset --hard && git rm --cached -r -f .');
+  exec('doxx --template ./views/docsTemplate.jade --source . --ignore node_modules,test -T ../togglejs.github.io/');
+  exec('open ../togglejs.github.io/index.html');
 });
 
 gulp.task('lint', function () {
