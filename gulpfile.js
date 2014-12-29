@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var gulp   = require('gulp');
 var $ = require('gulp-load-plugins')();
+var exec = require('shelljs').exec;
 
 var plumberConfig = {};
 
@@ -20,6 +21,10 @@ if (process.env.CI) {
 }
 
 gulp.task('default', ['test']);
+
+gulp.task('docs', function () {
+  exec('doxx --source lib && open docs/index.html');
+});
 
 gulp.task('lint', function () {
   return gulp.src(paths.lint)
