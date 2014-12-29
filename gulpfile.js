@@ -32,7 +32,7 @@ gulp.task('default', ['test']);
 
 gulp.task('docs', function () {
   exec('pushd ../togglejs.github.io/ && git reset --hard && git rm --cached -r -f .');
-  exec('doxx --template ./views/docsTemplate.jade --source . --ignore node_modules,test -T ../togglejs.github.io/');
+  exec('doxx --template ./views/docsTemplate.jade --source . --ignore node_modules,test,coverage -T ../togglejs.github.io/');
   exec('open ../togglejs.github.io/index.html');
 });
 
