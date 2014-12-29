@@ -2,7 +2,7 @@
 
 ## What is it?
 
-It's a library that contains a blog 'model' and a set of gulp helpers to assist generating a static blog. It's what's currently powering my blog [staxmanade.com](http://staxmanade.com).
+It's a library & a command line tool (`tog`) that contains a blog `model`, a set of gulp helpers, and a command line tool that help to assist generating and publishing a static blog. It's what's currently powering my blog/site [staxmanade.com](http://staxmanade.com).
 
 ## Why not use another static blog generator?
 
@@ -14,4 +14,4 @@ I wrote a series on how to migrate from Blogspot to Octopres and then struggled 
 
 # Can I use it?
 
-Of course (that's why it's out here) - but I can't say I know the future of it at this point. I will probably hack on it once in a while. Free to start up a [converstaion in the isssues](https://github.com/togglejs/toggle/issues).
+Of course (that's why it's out here) - but I can't say I know the future of it at this point. I will probably hack on it once in a while. Feel free to start up a [converstaion in the isssues](https://github.com/togglejs/toggle/issues).
