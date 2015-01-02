@@ -7,7 +7,6 @@
   "requireSpaceAfterBinaryOperators": ["?", "+", "/", "*", ":", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="],
   "disallowImplicitTypeConversion": ["string"],
   "disallowKeywords": ["with"],
-  "disallowMultipleLineBreaks": true,
   "disallowKeywordsOnNewLine": ["else"],
   "disallowTrailingWhitespace": true,
   "requireLineFeedAtFileEnd": true,

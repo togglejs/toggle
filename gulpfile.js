@@ -5,10 +5,10 @@ var gulp   = require('gulp');
 var $ = require('gulp-load-plugins')();
 var shelljs = require('shelljs');
 var exec = function (cmd) {
-  console.log("Running command: " + cmd);
+  console.log('Running command: ' + cmd);
   var result = shelljs.exec(cmd);
-  if(result.code !== 0) {
-    console.error("Error running command: " + cmd);
+  if (result.code !== 0) {
+    console.error('Error running command: ' + cmd);
     throw JSON.stringify(result);
   }
 };
