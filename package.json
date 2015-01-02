@@ -50,22 +50,23 @@
     "through2": "^0.4.1"
   },
   "dependencies": {
-    "glob": "^3.2.9",
-    "diy-handlebars-helpers": "^1.0.10",
-    "js-striphtml": "^1.1.0",
-    "gulp-debug": "^0.3.0",
-    "node-uuid": "^1.4.1",
-    "xml": "0.0.12",
-    "front-matter": "^0.2.0",
-    "vinyl": "^0.2.3",
-    "liftoff": "^0.10.0",
     "chalk": "^0.4.0",
-    "tildify": "^0.2.0",
-    "dateformat": "^1.0.7-1.2.3",
-    "semver": "^2.3.0",
     "commander": "^2.2.0",
+    "coveralls": "^2.11.2",
+    "dateformat": "^1.0.7-1.2.3",
+    "diy-handlebars-helpers": "^1.0.10",
+    "front-matter": "^0.2.0",
+    "gemoji": "^0.2.1",
+    "glob": "^3.2.9",
+    "gulp-debug": "^0.3.0",
+    "js-striphtml": "^1.1.0",
+    "liftoff": "^0.10.0",
     "node-fs": "^0.1.7",
+    "node-uuid": "^1.4.1",
     "q": "^1.0.1",
-    "coveralls": "^2.11.2"
+    "semver": "^2.3.0",
+    "tildify": "^0.2.0",
+    "vinyl": "^0.2.3",
+    "xml": "0.0.12"
   }
 }
