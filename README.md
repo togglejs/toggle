@@ -10,8 +10,8 @@ I should have :) - but I wanted to learn [GulpJS](http://gulpjs.com) and just ha
 
 # Why does your site look just like an [Octopress](http://octopress.org) site?
 
-I wrote a series on how to migrate from Blogspot to Octopres and then struggled to [get my series](https://github.com/jekyll/jekyll/issues/2226) to look the way I wanted and quickly found myself wanting to hack on something (not in Ruby). So I ported my OctoPress site to a static nodejs generated site leveraging Gulp and this set of libraries grew out of it.
+I wrote a series on how to migrate from Blogspot to Octopress and then struggled to [get my series](https://github.com/jekyll/jekyll/issues/2226) to look the way I wanted and quickly found myself wanting to hack on something (not in Ruby). So I ported my OctoPress site to a static nodejs generated site leveraging Gulp and this tool-set grew out of it.
 
 # Can I use it?
 
-Of course (that's why it's out here) - but I can't say I know the future of it at this point. I will probably hack on it once in a while. Feel free to start up a [converstaion in the isssues](https://github.com/togglejs/toggle/issues).
+Of course (that's why it's out here) - but I can't say I know the future of it at this point. I will probably hack on it once in a while. Feel free to start up a [conversation in the issues](https://github.com/togglejs/toggle/issues).
