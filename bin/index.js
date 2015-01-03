@@ -105,7 +105,7 @@ function processCLI(env, cliVersion, moduleVersion, isCompletion){
   glob.sync(__dirname + '/commands/**/*.js').forEach(loadCommand);
 
   var config = env.toggleConfig;
-  if(config) {
+  if (config) {
     // load custom commands
     var customCommandsPath = config.customCLICommandsPath;
     if (customCommandsPath) {

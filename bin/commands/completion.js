@@ -11,12 +11,12 @@ module.exports = function (program, env) { //jshint ignore:line
 //    .option('-o, --option <someOption>', 'TODO: add optional command options...')
     .action(function (shell, options) { //jshint ignore:line
 
-      if(shell) {
-        var filePath = path.join(__dirname, "completion", (shell || '').toLowerCase());
-        if(fs.existsSync(filePath)) {
+      if (shell) {
+        var filePath = path.join(__dirname, 'completion', (shell || '').toLowerCase());
+        if (fs.existsSync(filePath)) {
           console.log(fs.readFileSync(filePath).toString());
         } else {
-          console.error(chalk.red("ERROR: file path not found:", filePath));
+          console.error(chalk.red('ERROR: file path not found:', filePath));
         }
       } else {
 
