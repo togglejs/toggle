@@ -48,11 +48,13 @@ var launcher = function (env) {
     log('CLI PACKAGE.JSON', require('../package'));
   }
 
-  if (!env.modulePath) {
+  var isCompletion = env.argv._.indexOf('completion') >= 0;
+
+  if (!env.modulePath && !isCompletion) {
     reportError('No local ' + this.moduleName + '.json found in' + tildify(env.cwd) + '/n' + 'Try running: npm install ' + this.moduleName);
   }
 
-  if (!env.configPath) {
+  if (!env.configPath && !isCompletion) {
     reportError('No local ' + this.configName + '.json found in' + tildify(env.cwd));
     // TODO: link out to some documentation on how create a togglefile.json
     process.exit(1);
@@ -61,7 +63,7 @@ var launcher = function (env) {
   var cliPackage = require('../package');
 
   // check for semver difference between cli and local installation
-  if (semver.gt(cliPackage.version, env.modulePackage.version)) {
+  if (env.modulePackage.version && semver.gt(cliPackage.version, env.modulePackage.version)) {
     console.log(chalk.red('Warning: ' + this.moduleName + ' version mismatch:'));
     console.log(chalk.red('Running ' + this.moduleName + ' is', cliPackage.version));
     console.log(chalk.red('Local ' + this.moduleName + ' (installed in dir) is', env.modulePackage.version));
@@ -76,20 +78,19 @@ var launcher = function (env) {
       lintConfig(env.toggleConfig, env.configPath, 'ignoreFriendlyOKmsg');
     }
 
-    processCLI(env, cliPackage.version, env.modulePackage.version);
+    processCLI(env, cliPackage.version, env.modulePackage.version, isCompletion);
 
     // TODO: not sure why this is here - it it necessary?
     var gulpInst = require(env.modulePath);  //jshint ignore:line
 
   } else {
-    log('No togglefile.js found.');
+    processCLI(env, cliPackage.version, env.modulePackage.version, isCompletion);
   }
 };
 
-function processCLI(env, cliVersion, moduleVersion){
+function processCLI(env, cliVersion, moduleVersion, isCompletion){
 
   var program = require('commander');
-  var config = env.toggleConfig;
   program.version(cliVersion);
 
   var loadCommand = function (command) {
@@ -103,19 +104,28 @@ function processCLI(env, cliVersion, moduleVersion){
   // load built-in commands
   glob.sync(__dirname + '/commands/**/*.js').forEach(loadCommand);
 
-  // load custom commands
-  var customCommandsPath = config.customCLICommandsPath;
-  if (customCommandsPath) {
-    var loggedFirstCustomCommand = false;
-    glob.sync(customCommandsPath).forEach(function (cmd) {
-      if (!loggedFirstCustomCommand) {
-        loggedFirstCustomCommand = true;
-        log('Found custom commands' + customCommandsPath);
-      }
-      log('Loading custom command : ' + cmd);
-      loadCommand(path.join(process.cwd(), cmd));
-      log('Success loading command: ' + cmd);
-    });
+  var config = env.toggleConfig;
+  if(config) {
+    // load custom commands
+    var customCommandsPath = config.customCLICommandsPath;
+    if (customCommandsPath) {
+      var loggedFirstCustomCommand = false;
+      glob.sync(customCommandsPath).forEach(function (cmd) {
+        if (!loggedFirstCustomCommand) {
+          loggedFirstCustomCommand = true;
+          if (!isCompletion) {
+            log('Found custom commands' + customCommandsPath);
+          }
+        }
+        if (!isCompletion) {
+          log('Loading custom command : ' + cmd);
+        }
+        loadCommand(path.join(process.cwd(), cmd));
+        if (!isCompletion) {
+          log('Success loading command: ' + cmd);
+        }
+      });
+    }
   }
 
   if (process.argv.length === 2) {
