@@ -3,6 +3,8 @@ env: CI=true
 node_js:
   - '0.10'
 before_script:
+  # http://stackoverflow.com/questions/25902927/travis-not-installing-npm-modules
+  - npm update -q
   - npm install -g gulp
 after_script:
   - npm run coveralls
