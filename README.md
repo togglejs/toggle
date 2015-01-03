@@ -19,3 +19,9 @@ I wrote a series on how to [migrate from Blogspot to Octopress](http://staxmanad
 I need to create a sample `gulpfile.js` to show how I use it to generate my blog.
 
 Feel free to start up a [conversation in the issues](https://github.com/togglejs/toggle/issues).
+
+# Badges
+
+[![Build Status](https://travis-ci.org/togglejs/toggle.svg?branch=master)](https://travis-ci.org/togglejs/toggle)
+
+[![Coverage Status](https://img.shields.io/coveralls/togglejs/toggle.svg)](https://coveralls.io/r/togglejs/toggle)
