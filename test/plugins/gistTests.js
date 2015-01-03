@@ -12,7 +12,7 @@ var File = gutil.File;
 
 var sut = require("../../lib/plugins/gist");
 
-describe('alias', function () {
+describe('gist', function () {
 
   it('Should token replace gists with a file', function (done) {
     var stream = sut();
