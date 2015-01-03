@@ -4,6 +4,8 @@ var gulp = require('gulp');
 var gulp   = require('gulp');
 var $ = require('gulp-load-plugins')();
 var shelljs = require('shelljs');
+var opn = require('opn');
+
 var exec = function (cmd) {
   console.log('Running command: ' + cmd);
   var result = shelljs.exec(cmd);
@@ -65,5 +67,9 @@ gulp.task('watch', ['test'], function () {
 });
 
 gulp.task('test', ['lint', 'coverage']);
+
+
+gulp.task('travis', function () { opn('https://travis-ci.org/togglejs/toggle'); });
+gulp.task('coveralls', function () { opn('https://coveralls.io/r/togglejs/toggle'); });
 
 gulp.task('default', ['test']);
