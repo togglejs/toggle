@@ -29,7 +29,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "approvals": "^0.0",
+    "approvals": "~0",
     "chai": "^1.9.1",
     "gulp": "~3.6.1",
     "gulp-istanbul": "^0.5.0",
