@@ -6,11 +6,11 @@ It's a library of node/javascript helpers and series of [gulp](http://gulpjs.com
 
 ## Why not use another static blog generator?
 
-I should have :) - but I wanted to learn [GulpJS](http://gulpjs.com) and just hack on something.
+I should have :) - but wanted to learn [GulpJS](http://gulpjs.com) and [just hack on something](http://staxmanade.com/2015/03/custom-static-blog-generator---no-longer-using-octopress/).
 
 # Why does your site look just like an [Octopress](http://octopress.org) site?
 
-I wrote a series on how to [migrate from Blogspot to Octopress](http://staxmanade.com/2014/04/migrating-blogspot-to-octopress-part-1-introduction/) and then struggled to [get my series](https://github.com/jekyll/jekyll/issues/2226) to render the way I wanted using Jekyll/Octopress and quickly found myself wanting to hack on something (not in Ruby). So I ported my blog yet-again from OctoPress to a static nodejs generated site leveraging Gulp and this tool-set grew out of it.
+I wrote a series on how to [migrate from Blogspot to Octopress](http://staxmanade.com/2014/04/migrating-blogspot-to-octopress-part-1-introduction/) and then struggled to [get my series](https://github.com/jekyll/jekyll/issues/2226) to render the way I wanted using Jekyll/Octopress and quickly found myself wanting to hack on something (not in Ruby). So I [ported my blog yet-again](http://staxmanade.com/2015/03/custom-static-blog-generator---no-longer-using-octopress/) from OctoPress to a static nodejs generated site leveraging Gulp and this tool-set grew out of it.
 
 # Can I use it?
 
