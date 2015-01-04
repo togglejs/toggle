@@ -20,7 +20,7 @@ I need to create a sample `gulpfile.js` to show how I use it to generate my blog
 
 Feel free to start up a [conversation in the issues](https://github.com/togglejs/toggle/issues).
 
-# Badges
+# Other Info
 
 [![Build Status](https://travis-ci.org/togglejs/toggle.svg?branch=master)](https://travis-ci.org/togglejs/toggle)
 
