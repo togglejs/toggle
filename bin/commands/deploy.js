@@ -123,6 +123,9 @@ module.exports = function (program, env) {
             if (nocommit) {
               return Q.resolve();
             }
+            if( /^win/.test(process.platform)) {
+              return system('git commit -m "Updated site: ' + (new Date()).toUTCString() + '"');
+            }
             return system('git commit -m \'Updated site: ' + (new Date()).toUTCString() + '\'');
           }).then(function () {
             if (nopush) {
