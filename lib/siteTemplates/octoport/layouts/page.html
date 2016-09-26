@@ -29,10 +29,12 @@
                 {{/if}}
             </article>
             {{#if disqus.short_name}}
+            {{#if showComments }}
             <section>
                 <h1>Comments</h1>
                 <div id="disqus_thread" aria-live="polite">{{{include "disqus_thread" }}}</div>
             </section>
+            {{/if}}
             {{/if}}
         </div>
 
