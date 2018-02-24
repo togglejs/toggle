@@ -29,11 +29,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "approvals": "^0",
-    "chai": "^1.10.0",
-    "connect": "^3.3.3",
-    "opn": "^1.0.1",
-    "shelljs": "^0.3.0"
+    "approvals": "^2.1.2",
+    "chai": "^4.1.2",
+    "connect": "^3.6.6",
+    "opn": "^5.2.0",
+    "shelljs": "^0.8.1"
   },
   "dependencies": {
     "arraystream": "0.0.5",
