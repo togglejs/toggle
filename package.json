@@ -58,7 +58,7 @@
     "gulp-plumber": "^0.6.6",
     "gulp-util": "^2.2.14",
     "js-striphtml": "^1.1.0",
-    "js-yaml": "~3.0.2",
+    "js-yaml": "^3.12.2",
     "jshint-stylish": "^1.0.0",
     "liftoff": "^0.10.0",
     "liquid-node": "^0.2.0",
