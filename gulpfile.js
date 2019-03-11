@@ -30,21 +30,22 @@ if (process.env.CI) {
   };
 }
 
-gulp.task('docs', function () {
+module.exports.docs = function (cb) {
   exec('pushd ../togglejs.github.io/ && git reset --hard && git rm --cached -r -f .');
   exec('doxx --template ./views/docsTemplate.jade --source . --ignore node_modules,test,coverage -T ../togglejs.github.io/');
   exec('open ../togglejs.github.io/index.html');
-});
+  cb();
+};
 
-gulp.task('lint', function () {
+module.exports.lint = function () {
   return gulp.src(paths.lint)
     .pipe($.jshint('.jshintrc'))
     .pipe($.plumber(plumberConfig))
     .pipe($.jscs())
     .pipe($.jshint.reporter('jshint-stylish'));
-});
+};
 
-gulp.task('coverage', function (cb) {
+module.exports.coverage = function (cb) {
   gulp.src(paths.source)
   .pipe($.istanbul()) // Covering files
   .pipe($.istanbul.hookRequire())
@@ -58,16 +59,21 @@ gulp.task('coverage', function (cb) {
       cb();
     });
   });
+};
+
+module.exports.test = gulp.series(module.exports.lint, module.exports.coverage);
+
+module.exports.watch = gulp.series(module.exports.test, function () {
+  gulp.watch(paths.watch, gulp.series(module.exports.test));
 });
 
-gulp.task('watch', testTask, function () {
-  gulp.watch(paths.watch, gulp.series(testTask));
-});
+module.exports.travis = function (cb) {
+  opn('https://travis-ci.org/togglejs/toggle');
+  cb();
+};
+module.exports.coveralls = function () {
+  opn('https://coveralls.io/r/togglejs/toggle');
+  cb();
+};
 
-var testTask = gulp.task('test', gulp.series('lint', 'coverage'));
-
-
-gulp.task('travis', function () { opn('https://travis-ci.org/togglejs/toggle'); });
-gulp.task('coveralls', function () { opn('https://coveralls.io/r/togglejs/toggle'); });
-
-gulp.task('default', testTask);
+module.exports.default = module.exports.test;

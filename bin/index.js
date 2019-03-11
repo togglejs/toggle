@@ -10,6 +10,7 @@ var glob = require('glob');
 var log = require('../lib/util/log.js');
 var path = require('path');
 var chalk = require('chalk');
+var minimist = require('minimist');
 
 var Toggle = new Liftoff({
   name: 'toggle',
@@ -34,9 +35,11 @@ var printHelpMessage = function(program, cliVersion, moduleVersion) {
 };
 
 var launcher = function (env) {
-  if (env.argv.verbose) {
+  var argv = minimist(process.argv.slice(2));
+
+  if (argv.verbose) {
     log('LIFTOFF SETTINGS:', this);
-    log('CLI OPTIONS:', env.argv);
+    log('CLI OPTIONS:', argv);
     log('CWD:', env.cwd);
     log('LOCAL MODULES PRELOADED:', env.preload);
     log('EXTENSIONS RECOGNIZED:', env.validExtensions);
@@ -48,7 +51,7 @@ var launcher = function (env) {
     log('CLI PACKAGE.JSON', require('../package'));
   }
 
-  var isCompletion = env.argv._.indexOf('completion') >= 0;
+  var isCompletion = argv._.indexOf('completion') >= 0;
 
   if (!env.modulePath && !isCompletion) {
     reportError('No local ' + this.moduleName + '.json found in' + tildify(env.cwd) + '/n' + 'Try running: npm install ' + this.moduleName);
@@ -135,4 +138,4 @@ function processCLI(env, cliVersion, moduleVersion, isCompletion){
   }
 }
 
-Toggle.launch(launcher);
+Toggle.launch({}, launcher);
