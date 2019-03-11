@@ -26,7 +26,7 @@ describe('gist', function () {
     .pipe(assert.end(done));
 
     var file = new File();
-    file.contents = new Buffer("this is some test content with a gist: {{ gist FFFFFFFFFF \"testFile+otherName.js\" }}");
+    file.contents = Buffer.from("this is some test content with a gist: {{ gist FFFFFFFFFF \"testFile+otherName.js\" }}");
 
     stream.write(file);
     stream.end();
@@ -45,7 +45,7 @@ describe('gist', function () {
     .pipe(assert.end(done));
 
     var file = new File();
-    file.contents = new Buffer("this is some test content with a gist: [gist id=FFFFFFFFFF]");
+    file.contents = Buffer.from("this is some test content with a gist: [gist id=FFFFFFFFFF]");
 
     stream.write(file);
     stream.end();
