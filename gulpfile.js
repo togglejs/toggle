@@ -30,8 +30,6 @@ if (process.env.CI) {
   };
 }
 
-gulp.task('default', ['test']);
-
 gulp.task('docs', function () {
   exec('pushd ../togglejs.github.io/ && git reset --hard && git rm --cached -r -f .');
   exec('doxx --template ./views/docsTemplate.jade --source . --ignore node_modules,test,coverage -T ../togglejs.github.io/');
@@ -62,14 +60,14 @@ gulp.task('coverage', function (cb) {
   });
 });
 
-gulp.task('watch', ['test'], function () {
-  gulp.watch(paths.watch, ['test']);
+gulp.task('watch', testTask, function () {
+  gulp.watch(paths.watch, gulp.series(testTask));
 });
 
-gulp.task('test', ['lint', 'coverage']);
+var testTask = gulp.task('test', gulp.series('lint', 'coverage'));
 
 
 gulp.task('travis', function () { opn('https://travis-ci.org/togglejs/toggle'); });
 gulp.task('coveralls', function () { opn('https://coveralls.io/r/togglejs/toggle'); });
 
-gulp.task('default', ['test']);
+gulp.task('default', testTask);
