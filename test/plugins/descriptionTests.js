@@ -26,7 +26,7 @@ describe('description', function () {
 
     var file = new File();
     file.togMetadata = {};
-    file.contents = new Buffer("<h1>this is some test content</h1>\r\n\r\n <b>with a some bold text</b>");
+    file.contents = Buffer.from("<h1>this is some test content</h1>\r\n\r\n <b>with a some bold text</b>");
 
     stream.write(file);
     stream.end();
