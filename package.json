@@ -29,7 +29,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "approvals": "^3.0.2",
+    "approvals": "^3.0.3",
     "chai": "^4.2.0",
     "connect": "^3.6.6",
     "jshint": "^2.10.1",

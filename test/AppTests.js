@@ -99,7 +99,7 @@ describe("when using a site", function () {
         it("should generate category objects", function () {
 
             var categories = site.getCategories();
-            var result = _.pluck(categories, "name");
+            var result = _.map(categories, "name");
 
             expect(result).to.eql(['a', 'post', 'series']);
         });
